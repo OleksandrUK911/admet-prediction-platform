@@ -14,3 +14,5 @@ models/*.pkl
 models/*.pt
 .pytest_cache/
 .coverage
+
+TODO/
