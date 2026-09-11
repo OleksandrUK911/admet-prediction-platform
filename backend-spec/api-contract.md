@@ -17,6 +17,7 @@ CYP450 P2 item is later picked up.
 ### Response — 200 OK
 ```json
 {
+  "id": "b3f1c2a0-...",
   "smiles": "CC(=O)Oc1ccccc1C(=O)O",
   "disclaimer": "Research/educational use only. Not for clinical or regulatory decision-making.",
   "model_version": "0.1.0",
@@ -41,6 +42,7 @@ CYP450 P2 item is later picked up.
 
 | Field | Type | Notes |
 |---|---|---|
+| `id` | string (UUID) | server-generated, persisted so `GET /admet-profile/{id}` and comparison-page shareable links work; the frontend never generates this itself |
 | `smiles` | string | canonicalized echo of input |
 | `disclaimer` | string | always present, fixed research-use text — see `frontend-spec/app-shell.md` for where it's shown in UI |
 | `model_version` | string | for traceability |
