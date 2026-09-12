@@ -35,7 +35,7 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.ensemble import RandomForestClassifier
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from features import DESCRIPTOR_COLUMNS, compute_descriptors, task_rows  # noqa: E402
+from features import DESCRIPTOR_COLUMNS, compute_descriptors, task_rows
 
 ROOT = Path(__file__).resolve().parent.parent
 PROCESSED_CSV = ROOT / "data" / "processed" / "admet_processed.csv"

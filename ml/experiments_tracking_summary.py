@@ -83,7 +83,11 @@ import timeit
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from features import CLASSIFICATION_TASKS, DESCRIPTOR_COLUMNS, REGRESSION_TASKS  # noqa: E402
+from features import (
+    CLASSIFICATION_TASKS,
+    DESCRIPTOR_COLUMNS,
+    REGRESSION_TASKS,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 RESULTS_DIR = ROOT / "ml" / "results"
@@ -181,7 +185,6 @@ def try_load_bundle():
         return None
     import joblib
     import pandas as pd
-
     from features import compute_descriptors, compute_fingerprints
 
     bundle = joblib.load(MODELS_JOBLIB_PATH)
