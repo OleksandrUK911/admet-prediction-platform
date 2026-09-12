@@ -46,6 +46,12 @@ jobs:
       - name: Run full evaluation
         run: python ml/evaluate.py
 
+      - name: Run experiment-tracking summary
+        run: python ml/experiments_tracking_summary.py
+
+      - name: Check ML regression gate (per-task metrics + calibration ECE)
+        run: python ml/check_regression_gate.py
+
       - name: Test (pytest)
         run: pytest ml/tests/ -v
 

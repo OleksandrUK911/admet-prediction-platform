@@ -67,6 +67,31 @@ def load_all_metrics() -> list[dict]:
 
 
 def pick_winner(records: list[dict], task: str, is_classification: bool) -> dict | None:
+    """THE formal winner-selection criterion for this project (see
+    ml/results/experiments_tracking_summary.md for the consolidated
+    comparison this criterion is applied to):
+
+      - Classification tasks: highest **val PR-AUC** among the non-floor
+        candidates (CLASSIFICATION_CANDIDATES - majority_class is
+        excluded, it's the floor, not a real contender). PR-AUC, not
+        ROC-AUC, because every classification task here is imbalanced
+        (see ml/results/per_task_comparison_report.md) - ROC-AUC can look
+        good while precision on the positive class is still poor.
+      - Regression tasks: lowest **val RMSE** among the non-floor
+        candidates (REGRESSION_CANDIDATES - naive_mean excluded).
+      - The multi-task NN (ml/experiments_multitask.py) is deliberately
+        NOT a candidate here - it is compared for information only (see
+        ml/results/multitask_comparison_report.md and
+        ml/experiments_tracking_summary.py's consolidated table), since
+        it only beat the per-task-best model on a minority of tasks and
+        packaging/serving one multi-task model per task would add
+        complexity this portfolio's results don't currently justify.
+
+    No other signal (e.g. calibration ECE, inference latency, artifact
+    size) enters this decision - those are tracked separately (see
+    ml/experiments_tracking_summary.py) precisely so the winner criterion
+    stays simple, single-metric, and auditable per task.
+    """
     candidates = CLASSIFICATION_CANDIDATES if is_classification else REGRESSION_CANDIDATES
     val_records = [r for r in records if r["task"] == task and r["split"] == "val" and r["model_name"] in candidates]
     if is_classification:

@@ -2,6 +2,7 @@ cloudpickle==3.1.2
 colorama==0.4.6
 iniconfig==2.3.0
 joblib==1.6.0
+matplotlib==3.10.6
 narwhals==2.26.0
 numpy==2.5.3
 packaging==26.3
