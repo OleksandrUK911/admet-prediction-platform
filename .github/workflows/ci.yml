@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint (ruff)
+        run: ruff check ml/
+
+      # data/raw/ and data/processed/ are gitignored (regenerated, not
+      # committed) - preprocess.py self-downloads all 4 source datasets,
+      # so CI always runs the full multi-task merge pipeline from scratch.
+      - name: Run preprocessing pipeline
+        run: python ml/preprocess.py
+
+      - name: Test (pytest)
+        run: pytest ml/tests/ -v
+
+      - name: Audit dependencies (pip-audit)
+        run: pip install pip-audit && pip-audit -r requirements.txt || true
