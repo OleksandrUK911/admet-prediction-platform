@@ -61,11 +61,15 @@ jobs:
       # Shared with the backend job below so it doesn't have to re-run the
       # whole preprocess->baseline->per-task->registry chain just to get a
       # model to serve - models.joblib (~125MB) is gitignored, not committed.
+      # data/processed/admet_processed.csv is included too - ModelService
+      # loads it at startup to build the applicability-domain NN index.
       - name: Upload production model artifact
         uses: actions/upload-artifact@v4
         with:
           name: production-model
-          path: models/production/
+          path: |
+            models/production/
+            data/processed/admet_processed.csv
           retention-days: 1
 
   backend:
@@ -88,7 +92,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: production-model
-          path: models/production/
+          path: .
 
       - name: Test (pytest + coverage)
         run: pytest backend/tests/ --cov=backend/app --cov-report=term-missing
