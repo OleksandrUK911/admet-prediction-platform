@@ -1,0 +1,168 @@
+/* Design tokens - see ../frontend-spec/design-system.md. Base tokens
+   (font, spacing, radius, dark/light) follow project #1's conventions;
+   the risk-color scale below is specific to this project's ADMET
+   risk-coding requirement. */
+:root {
+  --bg: #ffffff;
+  --surface: #f5f6f8;
+  --border: #e2e4e8;
+  --text: #1a1d23;
+  --text-muted: #5b6472;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --success: #16a34a;
+  --warning: #d97706;
+  --error: #c81e1e;
+  --radius-card: 8px;
+  --radius-chip: 4px;
+
+  /* Risk-color scale (see frontend-spec/design-system.md) - white text on
+     all three passes WCAG AA in both themes. */
+  --risk-low: #16a34a;
+  --risk-moderate: #d97706;
+  --risk-high: #dc2626;
+
+  /* Comparison-page molecule colors (identity, not risk). */
+  --compare-1: #2563eb;
+  --compare-2: #9333ea;
+  --compare-3: #059669;
+
+  /* Disclaimer banner - distinct from --warning so it reads as a
+     permanent fixture rather than a transient alert. */
+  --disclaimer-bg: #fef3c7;
+  --disclaimer-text: #78350f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1115;
+    --surface: #1a1d23;
+    --border: #2a2e37;
+    --text: #e8e9ec;
+    --text-muted: #9aa0ab;
+    --accent: #3b82f6;
+    --accent-hover: #2f6fe0;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --error: #f25454;
+    --risk-low: #22c55e;
+    --risk-moderate: #f59e0b;
+    --risk-high: #f25454;
+    --disclaimer-bg: #3a2f1a;
+    --disclaimer-text: #fde68a;
+  }
+}
+
+:root[data-theme="light"] {
+  --bg: #ffffff;
+  --surface: #f5f6f8;
+  --border: #e2e4e8;
+  --text: #1a1d23;
+  --text-muted: #5b6472;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --success: #16a34a;
+  --warning: #d97706;
+  --error: #c81e1e;
+  --risk-low: #16a34a;
+  --risk-moderate: #d97706;
+  --risk-high: #dc2626;
+  --disclaimer-bg: #fef3c7;
+  --disclaimer-text: #78350f;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1115;
+  --surface: #1a1d23;
+  --border: #2a2e37;
+  --text: #e8e9ec;
+  --text-muted: #9aa0ab;
+  --accent: #3b82f6;
+  --accent-hover: #2f6fe0;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #f25454;
+  --risk-low: #22c55e;
+  --risk-moderate: #f59e0b;
+  --risk-high: #f25454;
+  --disclaimer-bg: #3a2f1a;
+  --disclaimer-text: #fde68a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  margin: 0;
+}
+
+h1 { font-size: 24px; font-weight: 600; }
+h2 { font-size: 18px; font-weight: 600; }
+h3 { font-size: 15px; font-weight: 600; }
+.text-muted { color: var(--text-muted); }
+
+button {
+  font-family: inherit;
+}
+
+/* Responsive helpers */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.icon-button {
+  padding: 6px 10px;
+  border-radius: var(--radius-chip);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .two-column {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+  }
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Visually-hidden but still accessible to screen readers/keyboard. */
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
