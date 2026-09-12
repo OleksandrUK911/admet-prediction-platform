@@ -16,3 +16,4 @@ models/**/*.pt
 .coverage
 
 TODO/
+.claude/worktrees/
