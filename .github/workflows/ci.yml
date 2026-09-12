@@ -160,13 +160,22 @@ jobs:
 
       - uses: docker/setup-buildx-action@v3
 
+      # GHCR/Docker repository names must be lowercase - github.repository_owner
+      # can contain uppercase letters (e.g. "OleksandrUK911"), so it can't be
+      # used directly in an image tag.
+      - name: Compute lowercase image owner
+        id: image
+        run: echo "owner=${OWNER,,}" >> "$GITHUB_OUTPUT"
+        env:
+          OWNER: ${{ github.repository_owner }}
+
       - name: Build and push backend image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: backend/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/admet-prediction-platform-backend:latest
+          tags: ghcr.io/${{ steps.image.outputs.owner }}/admet-prediction-platform-backend:latest
 
       - name: Build and push frontend image
         uses: docker/build-push-action@v6
@@ -180,4 +189,4 @@ jobs:
           # production build.
           build-args: |
             VITE_API_BASE_URL=http://localhost:8000
-          tags: ghcr.io/${{ github.repository_owner }}/admet-prediction-platform-frontend:latest
+          tags: ghcr.io/${{ steps.image.outputs.owner }}/admet-prediction-platform-frontend:latest
