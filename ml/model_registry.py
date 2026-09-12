@@ -13,6 +13,16 @@ Reads ml/results/{baseline,per_task_xgboost}_metrics.json + data/processed/admet
 Writes models/production/models.joblib (dict of per-task model bundles)
 and models/production/metadata.json (matches backend-spec/api-contract.md's
 GET /admet-profile response shape for metrics/limitations).
+
+Reproducibility: `build_classifier()` and `retrain_regressor()` below are
+the ONE place that defines each `model_name`'s hyperparameters - if you
+change anything here, update ml/experiment_config.py's MODEL_HYPERPARAMETERS
+(mirrored, not derived) in the same commit, then re-run
+`python ml/experiment_config.py` to regenerate ml/experiment_config.json.
+That config file is the consolidated, per-task reference for which
+hyperparameters/features/split actually produced the currently registered
+winner - see TODO/ml/TODO_experiments_per_task_models.md's "Уніфікований
+конфіг per-task навчання" item.
 """
 
 import json

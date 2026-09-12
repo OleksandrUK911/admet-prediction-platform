@@ -1,0 +1,7 @@
+# imbalanced-learn is a heavy, occasional-use dependency for
+# ml/experiment_smote.py (the SMOTE oversampling exploration for the most
+# imbalanced classification tasks) - kept out of the main requirements.txt/CI
+# path, same pattern as ml/requirements-multitask.txt (torch, for the
+# multi-task NN experiment).
+# Install with: pip install -r ml/requirements-smote.txt
+imbalanced-learn==0.14.2
