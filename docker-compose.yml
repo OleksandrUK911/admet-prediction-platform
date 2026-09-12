@@ -1,0 +1,31 @@
+# SQLite (backend/app/db.py), not postgres - that was a deliberate choice
+# made earlier in this project (matching project #1), so there's no
+# postgres service here even though a generic devops template might expect
+# one. SQLite's file lives at /app/app.db inside the container (repo-root
+# relative, gitignored) and is NOT volume-mounted, same as project #1's
+# docker-compose.yml - `docker compose down` loses history, which is fine
+# at this project's scale (a portfolio demo, not a production service).
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:5173,http://localhost:3000}
+
+  # frontend: not added yet - frontend/ doesn't exist in this repo yet
+  # (being built in parallel this round). Once it does, this should mirror
+  # project #1's frontend service:
+  #
+  #   frontend:
+  #     build:
+  #       context: ./frontend
+  #       dockerfile: Dockerfile
+  #       args:
+  #         VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000}
+  #     ports:
+  #       - "5173:80"
+  #     depends_on:
+  #       - backend
