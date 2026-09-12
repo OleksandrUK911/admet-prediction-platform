@@ -3,3 +3,10 @@
 # requirements.txt/CI path, same pattern as project #1's GNN experiment.
 # Install with: pip install -r ml/requirements-multitask.txt
 torch==2.14.0
+
+# optuna is only needed for ml/experiment_optuna_multitask.py (hyperparameter
+# search over the multi-task NN's architecture/training config). It is
+# listed here rather than in a new requirements file because that script
+# already depends on torch anyway - see ml/requirements-optuna.txt for the
+# XGBoost-only Optuna search, which does not need torch.
+optuna==4.5.0
