@@ -10,8 +10,8 @@ build/
 .DS_Store
 data/raw/
 data/processed/
-models/*.pkl
-models/*.pt
+models/**/*.pkl
+models/**/*.pt
 .pytest_cache/
 .coverage
 
