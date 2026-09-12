@@ -1,0 +1,322 @@
+[
+  {
+    "task": "solubility",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "n_samples": 294,
+    "rmse": 0.6602492408040314,
+    "mae": 0.5359298586845398,
+    "r2": 0.8039852976799011
+  },
+  {
+    "task": "NR-AR",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.8128741132131245,
+    "pr_auc": 0.31518746894143884,
+    "n_positive": 68,
+    "n_total": 1660
+  },
+  {
+    "task": "NR-AR-LBD",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7559109115183882,
+    "pr_auc": 0.2899729608278299,
+    "n_positive": 55,
+    "n_total": 1553
+  },
+  {
+    "task": "NR-AhR",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7309879321689198,
+    "pr_auc": 0.2895697327387332,
+    "n_positive": 208,
+    "n_total": 1494
+  },
+  {
+    "task": "NR-Aromatase",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7545171339563863,
+    "pr_auc": 0.09687548837652504,
+    "n_positive": 45,
+    "n_total": 1329
+  },
+  {
+    "task": "NR-ER",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.6298058252427183,
+    "pr_auc": 0.2738979964532988,
+    "n_positive": 200,
+    "n_total": 1436
+  },
+  {
+    "task": "NR-ER-LBD",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.6849732835971368,
+    "pr_auc": 0.14383074208748126,
+    "n_positive": 78,
+    "n_total": 1604
+  },
+  {
+    "task": "NR-PPAR-gamma",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.4952861952861953,
+    "pr_auc": 0.02440189558808631,
+    "n_positive": 30,
+    "n_total": 1515
+  },
+  {
+    "task": "SR-ARE",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.6883793022824571,
+    "pr_auc": 0.3068030332513751,
+    "n_positive": 203,
+    "n_total": 1425
+  },
+  {
+    "task": "SR-ATAD5",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.5815369025057907,
+    "pr_auc": 0.044912291128054435,
+    "n_positive": 48,
+    "n_total": 1631
+  },
+  {
+    "task": "SR-HSE",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.6453709930508855,
+    "pr_auc": 0.11093555895044221,
+    "n_positive": 78,
+    "n_total": 1565
+  },
+  {
+    "task": "SR-MMP",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.8013743538015383,
+    "pr_auc": 0.4398859409618558,
+    "n_positive": 245,
+    "n_total": 1378
+  },
+  {
+    "task": "SR-p53",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.6865746997871713,
+    "pr_auc": 0.13855383846881886,
+    "n_positive": 86,
+    "n_total": 1583
+  },
+  {
+    "task": "fda_approved",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7815126050420167,
+    "pr_auc": 0.9855539432408519,
+    "n_positive": 255,
+    "n_total": 269
+  },
+  {
+    "task": "ct_tox",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7761437908496732,
+    "pr_auc": 0.22959336357578597,
+    "n_positive": 17,
+    "n_total": 269
+  },
+  {
+    "task": "bbbp_penetration",
+    "model_name": "multitask_nn",
+    "split": "val",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7046351084812623,
+    "pr_auc": 0.8175361192852715,
+    "n_positive": 182,
+    "n_total": 260
+  },
+  {
+    "task": "solubility",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "n_samples": 104,
+    "rmse": 0.7061083550323949,
+    "mae": 0.549167811870575,
+    "r2": 0.922558069229126
+  },
+  {
+    "task": "NR-AR",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7218713704994193,
+    "pr_auc": 0.20728295251068388,
+    "n_positive": 24,
+    "n_total": 598
+  },
+  {
+    "task": "NR-AR-LBD",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7125,
+    "pr_auc": 0.07176744968120734,
+    "n_positive": 10,
+    "n_total": 542
+  },
+  {
+    "task": "NR-AhR",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7749680648609193,
+    "pr_auc": 0.43062051709699345,
+    "n_positive": 89,
+    "n_total": 520
+  },
+  {
+    "task": "NR-Aromatase",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.6457457457457457,
+    "pr_auc": 0.14872841355746708,
+    "n_positive": 45,
+    "n_total": 489
+  },
+  {
+    "task": "NR-ER",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.6546766493055556,
+    "pr_auc": 0.25230831620984207,
+    "n_positive": 64,
+    "n_total": 496
+  },
+  {
+    "task": "NR-ER-LBD",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7547630679042501,
+    "pr_auc": 0.12865681839193968,
+    "n_positive": 23,
+    "n_total": 557
+  },
+  {
+    "task": "NR-PPAR-gamma",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7138025787359966,
+    "pr_auc": 0.09984505090538529,
+    "n_positive": 19,
+    "n_total": 517
+  },
+  {
+    "task": "SR-ARE",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.6334278336046708,
+    "pr_auc": 0.284975025304366,
+    "n_positive": 94,
+    "n_total": 473
+  },
+  {
+    "task": "SR-ATAD5",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7831717914438504,
+    "pr_auc": 0.1885571462841682,
+    "n_positive": 22,
+    "n_total": 566
+  },
+  {
+    "task": "SR-HSE",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.683227943390545,
+    "pr_auc": 0.11578876322656924,
+    "n_positive": 27,
+    "n_total": 519
+  },
+  {
+    "task": "SR-MMP",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.746594427244582,
+    "pr_auc": 0.4159733103389402,
+    "n_positive": 85,
+    "n_total": 465
+  },
+  {
+    "task": "SR-p53",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.752820891845282,
+    "pr_auc": 0.22572787159910349,
+    "n_positive": 41,
+    "n_total": 536
+  },
+  {
+    "task": "fda_approved",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.689522342064715,
+    "pr_auc": 0.9553378017957751,
+    "n_positive": 118,
+    "n_total": 129
+  },
+  {
+    "task": "ct_tox",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.7378151260504202,
+    "pr_auc": 0.1806382773525518,
+    "n_positive": 10,
+    "n_total": 129
+  },
+  {
+    "task": "bbbp_penetration",
+    "model_name": "multitask_nn",
+    "split": "test",
+    "trained_at": "2026-09-12T09:59:27.773883+00:00",
+    "roc_auc": 0.8581029185867897,
+    "pr_auc": 0.9343117194134825,
+    "n_positive": 124,
+    "n_total": 166
+  }
+]
