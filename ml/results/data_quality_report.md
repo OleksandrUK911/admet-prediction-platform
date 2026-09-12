@@ -64,8 +64,8 @@
 | 2 | `c1ccccc1` | 1658 |
 | 3 | `c1ccc(Cc2ccccc2)cc1` | 104 |
 | 4 | `c1ccncc1` | 103 |
-| 5 | `O=C1C=CC2C(=C1)CCC1C3CCCC3CCC21` | 83 |
-| 6 | `c1ccc2ccccc2c1` | 83 |
+| 5 | `c1ccc2ccccc2c1` | 83 |
+| 6 | `O=C1C=CC2C(=C1)CCC1C3CCCC3CCC21` | 83 |
 | 7 | `c1ccc(-c2ccccc2)cc1` | 75 |
 | 8 | `C1CCCCC1` | 70 |
 | 9 | `O=C1C=C2CCC3C4CCCC4CCC3C2CC1` | 55 |

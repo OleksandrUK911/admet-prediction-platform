@@ -36,7 +36,12 @@ from sklearn.neighbors import NearestNeighbors
 from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from features import CLASSIFICATION_TASKS, DESCRIPTOR_COLUMNS, compute_descriptors, task_rows
+from features import (
+    CLASSIFICATION_TASKS,
+    DESCRIPTOR_COLUMNS,
+    compute_descriptors,
+    task_rows,
+)
 from preprocess import murcko_scaffold
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -65,8 +70,10 @@ SOURCE_TASK_COLUMNS = {
 def class_imbalance_table(df: pd.DataFrame) -> list[str]:
     lines = [
         "## Класовий дисбаланс (15 classification tasks)\n\n",
-        "| Task | N labeled | Positives | Negatives | % positive |\n"
-        "|---|---|---|---|---|\n",
+        (
+            "| Task | N labeled | Positives | Negatives | % positive |\n"
+            "|---|---|---|---|---|\n"
+        ),
     ]
     for task in CLASSIFICATION_TASKS:
         rows = task_rows(df, task)
@@ -146,7 +153,7 @@ def scaffold_analysis(df: pd.DataFrame) -> tuple[list[str], dict]:
     scaffold_to_splits = df.groupby("_scaffold")["split"].unique()
     leaking = scaffold_to_splits[scaffold_to_splits.map(len) > 1]
     findings["n_unique_scaffolds"] = int(df["_scaffold"].nunique())
-    findings["n_leaking_scaffolds"] = int(len(leaking))
+    findings["n_leaking_scaffolds"] = len(leaking)
 
     lines.append(f"- Загальна кількість молекул: {len(df)}\n")
     lines.append(f"- Унікальних Bemis-Murcko scaffolds: {findings['n_unique_scaffolds']}\n")
@@ -221,11 +228,13 @@ def scaffold_analysis(df: pd.DataFrame) -> tuple[list[str], dict]:
 
 def applicability_domain_summary(df: pd.DataFrame) -> list[str]:
     lines = [
-        "\n## Applicability domain: загальна характеристика хімічного простору train\n\n"
-        "Це доповнює per-task аналіз у `ml/calibration.py` (nearest-neighbor distance "
-        "test-vs-train для 4 задач) - тут натомість характеризується сам train split "
-        "загалом: наскільки він \"розсіяний\" чи \"кластеризований\" у просторі 7 спільних "
-        "дескрипторів (`ml/features.py::DESCRIPTOR_COLUMNS`), незалежно від жодної задачі.\n\n"
+        (
+            "\n## Applicability domain: загальна характеристика хімічного простору train\n\n"
+            "Це доповнює per-task аналіз у `ml/calibration.py` (nearest-neighbor distance "
+            "test-vs-train для 4 задач) - тут натомість характеризується сам train split "
+            "загалом: наскільки він \"розсіяний\" чи \"кластеризований\" у просторі 7 спільних "
+            "дескрипторів (`ml/features.py::DESCRIPTOR_COLUMNS`), незалежно від жодної задачі.\n\n"
+        )
     ]
 
     train = df[df["split"] == "train"]
