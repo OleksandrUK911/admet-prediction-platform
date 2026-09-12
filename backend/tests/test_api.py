@@ -1,3 +1,5 @@
+import time
+
 from fastapi.testclient import TestClient
 
 from backend.app.main import app
@@ -109,6 +111,51 @@ def test_rate_limit_returns_429_after_threshold():
         responses = [client.post("/admet-profile", json={"smiles": "CCO"}) for _ in range(31)]
     assert responses[-1].status_code == 429
     assert "detail" in responses[-1].json()
+
+
+def test_repeated_smiles_served_from_cache_faster_with_identical_prediction():
+    """See TODO/backend/TODO_database.md's "Кешування" section: the second
+    call for the same SMILES should hit ModelService's in-memory cache -
+    same prediction values, but its own fresh id/timestamp (history must
+    still gain a new row per request, cache or no cache)."""
+    with TestClient(app) as client:
+        start_first = time.perf_counter()
+        first = client.post("/admet-profile", json={"smiles": ASPIRIN_SMILES})
+        first_duration = time.perf_counter() - start_first
+
+        start_second = time.perf_counter()
+        second = client.post("/admet-profile", json={"smiles": ASPIRIN_SMILES})
+        second_duration = time.perf_counter() - start_second
+
+    assert first.status_code == 200
+    assert second.status_code == 200
+    first_body, second_body = first.json(), second.json()
+
+    # Fresh identity per request, even on a cache hit.
+    assert first_body["id"] != second_body["id"]
+
+    # Same underlying prediction, served from cache.
+    assert first_body["profile"] == second_body["profile"]
+    assert first_body["applicability_domain"] == second_body["applicability_domain"]
+    assert first_body["model_version"] == second_body["model_version"]
+
+    # Cache hit skips descriptor/fingerprint computation and all 16 model
+    # predict calls, so it should be substantially faster than the first,
+    # uncached call.
+    assert second_duration < first_duration
+
+
+def test_cached_prediction_still_writes_a_new_history_row():
+    """A cache hit must not skip the history write - every successful
+    /admet-profile call persists its own row, cached prediction or not."""
+    with TestClient(app) as client:
+        client.post("/admet-profile", json={"smiles": ASPIRIN_SMILES})
+        client.post("/admet-profile", json={"smiles": ASPIRIN_SMILES})
+        history_response = client.get("/history")
+
+    rows = history_response.json()
+    assert len(rows) == 2
+    assert rows[0]["id"] != rows[1]["id"]
 
 
 def test_unhandled_exception_returns_generic_500(monkeypatch):

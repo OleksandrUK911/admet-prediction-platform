@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from backend.app.inference import InvalidSmilesError, ModelService
+from backend.app.inference import MAX_HEAVY_ATOMS, InvalidSmilesError, ModelService
 from ml.features import TOX21_ASSAYS
 
 ASPIRIN_SMILES = "CC(=O)Oc1ccccc1C(=O)O"
@@ -91,6 +91,46 @@ def test_applicability_domain_flags_synthetic_far_outlier(service):
 
     assert ad["in_domain"] is False
     assert ad["distance_score"] > service._ad_threshold
+
+
+def test_predict_rejects_molecule_over_max_heavy_atoms(service):
+    """Defense against adversarial/huge molecules on top of the 300-char
+    request-body cap (backend/app/schemas.py) - see
+    TODO/backend/TODO_auth_security.md."""
+    # A single unbranched carbon chain: cheap to build, trivially exceeds
+    # MAX_HEAVY_ATOMS, and still well under the 300-char SMILES length cap.
+    long_chain_smiles = "C" * (MAX_HEAVY_ATOMS + 1)
+    with pytest.raises(InvalidSmilesError):
+        service.predict(long_chain_smiles)
+
+
+def test_predict_cache_hit_returns_same_profile_but_fresh_id(service):
+    """Cache key is (canonical_smiles, model_version) - see
+    TODO/backend/TODO_database.md. A repeat call for the same molecule must
+    reuse the cached profile/applicability_domain, but never reuse the id -
+    each /admet-profile call is its own persisted history row."""
+    service.clear_cache()
+    first = service.predict(ASPIRIN_SMILES)
+    second = service.predict(ASPIRIN_SMILES)
+
+    assert first["id"] != second["id"]
+    assert first["profile"] == second["profile"]
+    assert first["applicability_domain"] == second["applicability_domain"]
+
+
+def test_predict_cache_populated_after_first_call(service):
+    service.clear_cache()
+    result = service.predict(ASPIRIN_SMILES)
+    cache_key = (result["smiles"], result["model_version"])
+    assert cache_key in service._cache
+
+
+def test_clear_cache_forces_recomputation(service):
+    service.clear_cache()
+    service.predict(ASPIRIN_SMILES)
+    assert len(service._cache) == 1
+    service.clear_cache()
+    assert len(service._cache) == 0
 
 
 def test_applicability_domain_boundary_is_deterministic(service):

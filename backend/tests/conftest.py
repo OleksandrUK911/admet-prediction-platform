@@ -1,5 +1,6 @@
 import pytest
 
+import backend.app.main as main_module
 from backend.app import db
 from backend.app.main import limiter
 
@@ -20,3 +21,18 @@ def reset_rate_limiter():
     limiter.reset()
     yield
     limiter.reset()
+
+
+@pytest.fixture(autouse=True)
+def reset_prediction_cache():
+    """ModelService.predict()'s in-memory cache lives on the module-level
+    model_service instance, not per-request state. Most tests already get a
+    fresh instance per `with TestClient(app)` block (lifespan reloads the
+    model), but a module-scoped fixture (e.g. test_inference.py's `service`)
+    or a test running outside a fresh TestClient context could otherwise see
+    another test's cached predictions - clear it explicitly either way."""
+    if main_module.model_service is not None:
+        main_module.model_service.clear_cache()
+    yield
+    if main_module.model_service is not None:
+        main_module.model_service.clear_cache()

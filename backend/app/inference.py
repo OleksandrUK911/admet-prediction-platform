@@ -9,8 +9,10 @@ Reuses ml/features.py's compute_descriptors / compute_fingerprints EXACTLY
 as training did, so inference-time features match training-time features.
 """
 
+import copy
 import json
 import uuid
+from collections import OrderedDict
 from pathlib import Path
 from typing import TypedDict
 
@@ -31,10 +33,43 @@ PROCESSED_CSV = REPO_ROOT / "data" / "processed" / "admet_processed.csv"
 
 DISCLAIMER = "Research/educational use only. Not for clinical or regulatory decision-making."
 
+# Prediction cache: in-memory only, see TODO/backend/TODO_database.md's
+# "Кешування" section for the reasoning behind this choice.
+#
+# - Level: plain process-local dict (an OrderedDict used as a tiny LRU),
+#   NOT Redis/Postgres. This is a single-process portfolio demo serving one
+#   uvicorn worker - there is no second process or replica that would need
+#   to share cache state, so an external cache store would add an ops
+#   dependency (a running Redis instance, a client library, network calls
+#   on every request) with zero benefit at this scale. If this ever ran as
+#   multiple worker processes/replicas behind a load balancer, an external
+#   cache would become worth it for a shared hit rate - documented here
+#   rather than built preemptively.
+# - Key: (canonical_smiles, model_version). Canonical (not raw) SMILES so
+#   two different-but-equivalent input strings for the same molecule still
+#   share one cache entry.
+# - Invalidation: implicit via the key. A model upgrade changes
+#   metadata["model_version"], which changes every cache key, so old
+#   entries are simply never looked up again - no explicit invalidation
+#   pass needed. They age out of the LRU like anything else instead of
+#   being deleted eagerly, which is fine since they can never be hit again.
+CACHE_MAX_SIZE = 256
+
 # Top 10% nearest-neighbor distance (in scaled 7-descriptor space) to the
 # training set = "out of domain", matching the threshold convention already
 # used in ml/calibration.py's applicability-domain check.
 OOD_QUANTILE = 0.90
+
+# Sanity cap on parsed molecule size, on top of the 300-char string length
+# cap already enforced by AdmetProfileRequest.smiles (backend/app/schemas.py).
+# The char cap alone doesn't bound atom count: SMILES ring-closure/branch
+# syntax lets a short string still expand into a huge graph (e.g. long runs
+# of a repeated fragment), and descriptor/fingerprint computation cost scales
+# with atom count - so this is a defensive check against adversarial/huge
+# inputs, not primarily a UX validation. 200 heavy atoms is generously above
+# any real drug-like molecule (typically <60) and above every molecule in
+# the training data, so legitimate inputs are never affected.
+MAX_HEAVY_ATOMS = 200
 
 
 class InvalidSmilesError(ValueError):
@@ -77,7 +112,19 @@ class ModelService:
     Instantiate a single instance at application startup - do not reload
     per request (see backend/app/main.py's lifespan)."""
 
-    def __init__(self, production_dir: Path = PRODUCTION_DIR, processed_csv: Path = PROCESSED_CSV):
+    def __init__(
+        self,
+        production_dir: Path = PRODUCTION_DIR,
+        processed_csv: Path = PROCESSED_CSV,
+        cache_max_size: int = CACHE_MAX_SIZE,
+    ):
+        # (canonical_smiles, model_version) -> cached prediction (everything
+        # except "id", which is always freshly generated - see predict()).
+        # OrderedDict doubles as a simple LRU: a hit moves its key to the
+        # end, and the oldest entry is evicted once the cache is full.
+        self._cache: OrderedDict[tuple[str, str], dict] = OrderedDict()
+        self._cache_max_size = cache_max_size
+
         models_path = production_dir / "models.joblib"
         metadata_path = production_dir / "metadata.json"
         if not models_path.exists():
@@ -145,12 +192,31 @@ class ModelService:
         value = float(model.predict(X_in)[0])
         return value, "regression"
 
+    def clear_cache(self) -> None:
+        """Drop all cached predictions. Mainly for test isolation (see
+        backend/tests/conftest.py's reset_prediction_cache fixture)."""
+        self._cache.clear()
+
     def predict(self, smiles: str) -> PredictionResult:
         mol = Chem.MolFromSmiles(smiles)
         if mol is None:
             raise InvalidSmilesError("Could not parse this SMILES string")
+        if mol.GetNumAtoms() > MAX_HEAVY_ATOMS:
+            raise InvalidSmilesError(
+                f"Molecule too large ({mol.GetNumAtoms()} heavy atoms, max {MAX_HEAVY_ATOMS})"
+            )
 
         canonical_smiles = Chem.MolToSmiles(mol, canonical=True)
+        model_version = self.metadata.get("model_version", "unknown")
+        cache_key = (canonical_smiles, model_version)
+
+        cached = self._cache.get(cache_key)
+        if cached is not None:
+            self._cache.move_to_end(cache_key)  # mark as most recently used
+            fresh = copy.deepcopy(cached)
+            fresh["id"] = str(uuid.uuid4())  # every request gets its own id, cached or not
+            return fresh
+
         smiles_series = pd.Series([canonical_smiles])
         descriptor_row = compute_descriptors(smiles_series)[self.descriptor_columns].to_numpy()[0]
         fingerprint_row = compute_fingerprints(smiles_series)[0]
@@ -202,11 +268,11 @@ class ModelService:
             "confidence": classification_confidence(fda_proba),
         }
 
-        return {
+        result: PredictionResult = {
             "id": str(uuid.uuid4()),
             "smiles": canonical_smiles,
             "disclaimer": DISCLAIMER,
-            "model_version": self.metadata.get("model_version", "unknown"),
+            "model_version": model_version,
             "applicability_domain": self._applicability_domain(descriptor_row),
             "profile": {
                 "solubility": solubility,
@@ -216,3 +282,9 @@ class ModelService:
                 "fda_approval_likelihood": fda_approval_likelihood,
             },
         }
+
+        self._cache[cache_key] = copy.deepcopy(result)
+        if len(self._cache) > self._cache_max_size:
+            self._cache.popitem(last=False)  # evict the least-recently-used entry
+
+        return result
