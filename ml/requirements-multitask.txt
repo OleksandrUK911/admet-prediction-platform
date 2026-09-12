@@ -9,4 +9,4 @@ torch==2.14.0
 # listed here rather than in a new requirements file because that script
 # already depends on torch anyway - see ml/requirements-optuna.txt for the
 # XGBoost-only Optuna search, which does not need torch.
-optuna==4.5.0
+optuna==5.0.0

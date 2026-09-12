@@ -3,4 +3,4 @@
 # per-task XGBoost classifiers) - kept out of the main requirements.txt/CI
 # path, same isolation pattern as ml/requirements-multitask.txt (torch).
 # Install with: pip install -r ml/requirements-optuna.txt
-optuna==4.5.0
+optuna==5.0.0
