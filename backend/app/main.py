@@ -1,5 +1,5 @@
 """FastAPI application: POST /admet-profile, GET /admet-profile/{id},
-GET /history, GET /health - see backend-spec/api-contract.md."""
+GET /history, GET /health, GET /metrics - see backend-spec/api-contract.md."""
 
 import logging
 import os
@@ -9,7 +9,8 @@ from datetime import datetime, timezone
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
+from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
@@ -96,6 +97,17 @@ def health() -> dict:
     except sqlite3.Error:
         db_connected = False
     return {"status": "ok", "model_loaded": model_loaded, "db_connected": db_connected}
+
+
+@app.get(
+    "/metrics",
+    summary="Prometheus metrics",
+    description="Application metrics (request counts by endpoint/status, request latency "
+    "histogram) in Prometheus text-exposition format. Populated by the same "
+    "log_requests_middleware every request already flows through - see logging_config.py.",
+)
+def metrics() -> Response:
+    return Response(content=generate_latest(), media_type=CONTENT_TYPE_LATEST)
 
 
 @app.post(
