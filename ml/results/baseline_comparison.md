@@ -1,0 +1,105 @@
+# ADMET baseline comparison
+
+## Regression (solubility)
+
+| Task | Model | Split | N | RMSE | MAE | R2 |
+|---|---|---|---|---|---|---|
+| solubility | naive_mean | val | 294 | 1.498 | 1.183 | -0.009 |
+| solubility | ridge_descriptors | val | 294 | 0.890 | 0.708 | 0.644 |
+| solubility | naive_mean | test | 104 | 2.993 | 2.348 | -0.392 |
+| solubility | ridge_descriptors | test | 104 | 0.876 | 0.702 | 0.881 |
+
+## Classification (15 tasks)
+
+| Task | Model | Split | N | N+ | ROC-AUC | PR-AUC |
+|---|---|---|---|---|---|---|
+| NR-AR | majority_class | val | 1660 | 68 | 0.500 | 0.041 |
+| NR-AR | logistic_regression_fingerprints | val | 1660 | 68 | 0.728 | 0.504 |
+| NR-AR | random_forest_descriptors | val | 1660 | 68 | 0.808 | 0.523 |
+| NR-AR | majority_class | test | 598 | 24 | 0.500 | 0.040 |
+| NR-AR | logistic_regression_fingerprints | test | 598 | 24 | 0.701 | 0.271 |
+| NR-AR | random_forest_descriptors | test | 598 | 24 | 0.610 | 0.208 |
+| NR-AR-LBD | majority_class | val | 1553 | 55 | 0.500 | 0.035 |
+| NR-AR-LBD | logistic_regression_fingerprints | val | 1553 | 55 | 0.893 | 0.580 |
+| NR-AR-LBD | random_forest_descriptors | val | 1553 | 55 | 0.875 | 0.645 |
+| NR-AR-LBD | majority_class | test | 542 | 10 | 0.500 | 0.018 |
+| NR-AR-LBD | logistic_regression_fingerprints | test | 542 | 10 | 0.785 | 0.461 |
+| NR-AR-LBD | random_forest_descriptors | test | 542 | 10 | 0.857 | 0.321 |
+| NR-AhR | majority_class | val | 1494 | 208 | 0.500 | 0.139 |
+| NR-AhR | logistic_regression_fingerprints | val | 1494 | 208 | 0.768 | 0.388 |
+| NR-AhR | random_forest_descriptors | val | 1494 | 208 | 0.692 | 0.315 |
+| NR-AhR | majority_class | test | 520 | 89 | 0.500 | 0.171 |
+| NR-AhR | logistic_regression_fingerprints | test | 520 | 89 | 0.841 | 0.476 |
+| NR-AhR | random_forest_descriptors | test | 520 | 89 | 0.774 | 0.396 |
+| NR-Aromatase | majority_class | val | 1329 | 45 | 0.500 | 0.034 |
+| NR-Aromatase | logistic_regression_fingerprints | val | 1329 | 45 | 0.690 | 0.174 |
+| NR-Aromatase | random_forest_descriptors | val | 1329 | 45 | 0.755 | 0.125 |
+| NR-Aromatase | majority_class | test | 489 | 45 | 0.500 | 0.092 |
+| NR-Aromatase | logistic_regression_fingerprints | test | 489 | 45 | 0.600 | 0.187 |
+| NR-Aromatase | random_forest_descriptors | test | 489 | 45 | 0.774 | 0.245 |
+| NR-ER | majority_class | val | 1436 | 200 | 0.500 | 0.139 |
+| NR-ER | logistic_regression_fingerprints | val | 1436 | 200 | 0.647 | 0.334 |
+| NR-ER | random_forest_descriptors | val | 1436 | 200 | 0.614 | 0.310 |
+| NR-ER | majority_class | test | 496 | 64 | 0.500 | 0.129 |
+| NR-ER | logistic_regression_fingerprints | test | 496 | 64 | 0.697 | 0.347 |
+| NR-ER | random_forest_descriptors | test | 496 | 64 | 0.692 | 0.364 |
+| NR-ER-LBD | majority_class | val | 1604 | 78 | 0.500 | 0.049 |
+| NR-ER-LBD | logistic_regression_fingerprints | val | 1604 | 78 | 0.770 | 0.303 |
+| NR-ER-LBD | random_forest_descriptors | val | 1604 | 78 | 0.756 | 0.311 |
+| NR-ER-LBD | majority_class | test | 557 | 23 | 0.500 | 0.041 |
+| NR-ER-LBD | logistic_regression_fingerprints | test | 557 | 23 | 0.790 | 0.289 |
+| NR-ER-LBD | random_forest_descriptors | test | 557 | 23 | 0.781 | 0.275 |
+| NR-PPAR-gamma | majority_class | val | 1515 | 30 | 0.500 | 0.020 |
+| NR-PPAR-gamma | logistic_regression_fingerprints | val | 1515 | 30 | 0.735 | 0.127 |
+| NR-PPAR-gamma | random_forest_descriptors | val | 1515 | 30 | 0.783 | 0.126 |
+| NR-PPAR-gamma | majority_class | test | 517 | 19 | 0.500 | 0.037 |
+| NR-PPAR-gamma | logistic_regression_fingerprints | test | 517 | 19 | 0.813 | 0.392 |
+| NR-PPAR-gamma | random_forest_descriptors | test | 517 | 19 | 0.792 | 0.183 |
+| SR-ARE | majority_class | val | 1425 | 203 | 0.500 | 0.142 |
+| SR-ARE | logistic_regression_fingerprints | val | 1425 | 203 | 0.642 | 0.260 |
+| SR-ARE | random_forest_descriptors | val | 1425 | 203 | 0.747 | 0.400 |
+| SR-ARE | majority_class | test | 473 | 94 | 0.500 | 0.199 |
+| SR-ARE | logistic_regression_fingerprints | test | 473 | 94 | 0.683 | 0.364 |
+| SR-ARE | random_forest_descriptors | test | 473 | 94 | 0.758 | 0.468 |
+| SR-ATAD5 | majority_class | val | 1631 | 48 | 0.500 | 0.029 |
+| SR-ATAD5 | logistic_regression_fingerprints | val | 1631 | 48 | 0.714 | 0.128 |
+| SR-ATAD5 | random_forest_descriptors | val | 1631 | 48 | 0.649 | 0.151 |
+| SR-ATAD5 | majority_class | test | 566 | 22 | 0.500 | 0.039 |
+| SR-ATAD5 | logistic_regression_fingerprints | test | 566 | 22 | 0.740 | 0.088 |
+| SR-ATAD5 | random_forest_descriptors | test | 566 | 22 | 0.728 | 0.224 |
+| SR-HSE | majority_class | val | 1565 | 78 | 0.500 | 0.050 |
+| SR-HSE | logistic_regression_fingerprints | val | 1565 | 78 | 0.621 | 0.097 |
+| SR-HSE | random_forest_descriptors | val | 1565 | 78 | 0.689 | 0.180 |
+| SR-HSE | majority_class | test | 519 | 27 | 0.500 | 0.052 |
+| SR-HSE | logistic_regression_fingerprints | test | 519 | 27 | 0.681 | 0.116 |
+| SR-HSE | random_forest_descriptors | test | 519 | 27 | 0.692 | 0.115 |
+| SR-MMP | majority_class | val | 1378 | 245 | 0.500 | 0.178 |
+| SR-MMP | logistic_regression_fingerprints | val | 1378 | 245 | 0.766 | 0.435 |
+| SR-MMP | random_forest_descriptors | val | 1378 | 245 | 0.783 | 0.489 |
+| SR-MMP | majority_class | test | 465 | 85 | 0.500 | 0.183 |
+| SR-MMP | logistic_regression_fingerprints | test | 465 | 85 | 0.776 | 0.433 |
+| SR-MMP | random_forest_descriptors | test | 465 | 85 | 0.828 | 0.586 |
+| SR-p53 | majority_class | val | 1583 | 86 | 0.500 | 0.054 |
+| SR-p53 | logistic_regression_fingerprints | val | 1583 | 86 | 0.731 | 0.210 |
+| SR-p53 | random_forest_descriptors | val | 1583 | 86 | 0.722 | 0.196 |
+| SR-p53 | majority_class | test | 536 | 41 | 0.500 | 0.076 |
+| SR-p53 | logistic_regression_fingerprints | test | 536 | 41 | 0.703 | 0.246 |
+| SR-p53 | random_forest_descriptors | test | 536 | 41 | 0.753 | 0.251 |
+| fda_approved | majority_class | val | 269 | 255 | 0.500 | 0.948 |
+| fda_approved | logistic_regression_fingerprints | val | 269 | 255 | 0.823 | 0.988 |
+| fda_approved | random_forest_descriptors | val | 269 | 255 | 0.694 | 0.972 |
+| fda_approved | majority_class | test | 129 | 118 | 0.500 | 0.915 |
+| fda_approved | logistic_regression_fingerprints | test | 129 | 118 | 0.807 | 0.974 |
+| fda_approved | random_forest_descriptors | test | 129 | 118 | 0.560 | 0.926 |
+| ct_tox | majority_class | val | 269 | 17 | 0.500 | 0.063 |
+| ct_tox | logistic_regression_fingerprints | val | 269 | 17 | 0.785 | 0.369 |
+| ct_tox | random_forest_descriptors | val | 269 | 17 | 0.694 | 0.210 |
+| ct_tox | majority_class | test | 129 | 10 | 0.500 | 0.078 |
+| ct_tox | logistic_regression_fingerprints | test | 129 | 10 | 0.762 | 0.273 |
+| ct_tox | random_forest_descriptors | test | 129 | 10 | 0.644 | 0.243 |
+| bbbp_penetration | majority_class | val | 260 | 182 | 0.500 | 0.700 |
+| bbbp_penetration | logistic_regression_fingerprints | val | 260 | 182 | 0.801 | 0.905 |
+| bbbp_penetration | random_forest_descriptors | val | 260 | 182 | 0.814 | 0.895 |
+| bbbp_penetration | majority_class | test | 166 | 124 | 0.500 | 0.747 |
+| bbbp_penetration | logistic_regression_fingerprints | test | 166 | 124 | 0.859 | 0.943 |
+| bbbp_penetration | random_forest_descriptors | test | 166 | 124 | 0.811 | 0.896 |

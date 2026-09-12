@@ -28,6 +28,9 @@ jobs:
       - name: Run preprocessing pipeline
         run: python ml/preprocess.py
 
+      - name: Run baseline models
+        run: python ml/baseline.py
+
       - name: Test (pytest)
         run: pytest ml/tests/ -v
 
