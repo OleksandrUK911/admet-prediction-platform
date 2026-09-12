@@ -1,0 +1,78 @@
+[
+  {
+    "task": "NR-PPAR-gamma",
+    "model_name": "logistic_regression_fingerprints",
+    "n_train": 4312,
+    "n_pos_train": 135,
+    "n_neg_train": 4177,
+    "train_positive_rate": 0.03130797773654916,
+    "baseline_val": {
+      "roc_auc": 0.7354433221099888,
+      "pr_auc": 0.12660969356055224
+    },
+    "n_train_after_smote": 8354,
+    "smote_val": {
+      "roc_auc": 0.7265993265993266,
+      "pr_auc": 0.09140470666806079
+    },
+    "smote_skipped_reason": null,
+    "smote_pr_auc_delta": -0.03520498689249145
+  },
+  {
+    "task": "NR-AR-LBD",
+    "model_name": "random_forest_descriptors",
+    "n_train": 4539,
+    "n_pos_train": 165,
+    "n_neg_train": 4374,
+    "train_positive_rate": 0.036351619299405155,
+    "baseline_val": {
+      "roc_auc": 0.8746267750940648,
+      "pr_auc": 0.6598403128805949
+    },
+    "n_train_after_smote": 8748,
+    "smote_val": {
+      "roc_auc": 0.8789658939191649,
+      "pr_auc": 0.6785095709170508
+    },
+    "smote_skipped_reason": null,
+    "smote_pr_auc_delta": 0.018669258036455916
+  },
+  {
+    "task": "SR-ATAD5",
+    "model_name": "random_forest_descriptors",
+    "n_train": 4748,
+    "n_pos_train": 192,
+    "n_neg_train": 4556,
+    "train_positive_rate": 0.040438079191238416,
+    "baseline_val": {
+      "roc_auc": 0.7526716150768582,
+      "pr_auc": 0.17388383874464244
+    },
+    "n_train_after_smote": 9112,
+    "smote_val": {
+      "roc_auc": 0.7031019688355443,
+      "pr_auc": 0.16717401576371327
+    },
+    "smote_skipped_reason": null,
+    "smote_pr_auc_delta": -0.006709822980929175
+  },
+  {
+    "task": "NR-AR",
+    "model_name": "random_forest_descriptors",
+    "n_train": 4878,
+    "n_pos_train": 207,
+    "n_neg_train": 4671,
+    "train_positive_rate": 0.042435424354243544,
+    "baseline_val": {
+      "roc_auc": 0.7700266036062666,
+      "pr_auc": 0.5491231739846408
+    },
+    "n_train_after_smote": 9342,
+    "smote_val": {
+      "roc_auc": 0.7537041826780962,
+      "pr_auc": 0.5358502740894595
+    },
+    "smote_skipped_reason": null,
+    "smote_pr_auc_delta": -0.013272899895181323
+  }
+]

@@ -12,7 +12,7 @@
         "task": "NR-AR",
         "method": "platt_sigmoid",
         "n_val": 1660,
-        "ece": 0.016014452239994533,
+        "ece": 0.01601445223999453,
         "roc_auc": 0.8223516479456103
       },
       {
@@ -33,7 +33,7 @@
       "ood_mean_nn_distance": 1.5135391577514758,
       "in_domain_mean_nn_distance": 0.3099865724195741
     },
-    "trained_at": "2026-09-12T12:02:59.871880+00:00"
+    "trained_at": "2026-09-12T12:54:24.428028+00:00"
   },
   {
     "calibration": [
@@ -69,7 +69,7 @@
       "ood_mean_nn_distance": 1.3154627742270073,
       "in_domain_mean_nn_distance": 0.30809574273946844
     },
-    "trained_at": "2026-09-12T12:02:59.871880+00:00"
+    "trained_at": "2026-09-12T12:54:24.428028+00:00"
   },
   {
     "calibration": [
@@ -105,7 +105,7 @@
       "ood_mean_nn_distance": 1.5812073170200538,
       "in_domain_mean_nn_distance": 0.4023533098421022
     },
-    "trained_at": "2026-09-12T12:02:59.871880+00:00"
+    "trained_at": "2026-09-12T12:54:24.428028+00:00"
   },
   {
     "calibration": [
@@ -141,6 +141,6 @@
       "ood_mean_nn_distance": 1.5398330362613284,
       "in_domain_mean_nn_distance": 0.34723833428692263
     },
-    "trained_at": "2026-09-12T12:02:59.871880+00:00"
+    "trained_at": "2026-09-12T12:54:24.428028+00:00"
   }
 ]

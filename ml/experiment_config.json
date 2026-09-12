@@ -1,0 +1,400 @@
+{
+  "config_version": "1.0.0",
+  "generated_from": "models/production/metadata.json + ml/model_registry.py (hyperparameters mirrored manually - see this module's docstring)",
+  "seed": 42,
+  "split": {
+    "method": "scaffold_split",
+    "script": "ml/preprocess.py",
+    "function": "scaffold_split",
+    "ratios": {
+      "train": 0.7,
+      "val": 0.15,
+      "test": 0.15
+    },
+    "seed": 42,
+    "notes": "Groups molecules by Murcko scaffold (ml/preprocess.py's murcko_scaffold) before splitting, so structurally similar molecules land in the same split - a stricter, more realistic test of generalization than a random row split. Not to be confused with the per-scaffold error-rate analysis in ml/error_analysis_toxicity.py, which reads this same split's val rows but does not change it."
+  },
+  "features": {
+    "descriptors": {
+      "columns": [
+        "MolWt",
+        "LogP",
+        "TPSA",
+        "NumHDonors",
+        "NumHAcceptors",
+        "NumRotatableBonds",
+        "RingCount"
+      ],
+      "function": "ml/features.py:compute_descriptors",
+      "source": "RDKit Descriptors (same 7 physico-chemical descriptors as project #1, for portfolio consistency)"
+    },
+    "fingerprints": {
+      "type": "Morgan (ECFP-like)",
+      "radius": 2,
+      "n_bits": 1024,
+      "function": "ml/features.py:compute_fingerprints"
+    }
+  },
+  "calibration": {
+    "applied_to": "every classification task's final registered model",
+    "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+    "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+    "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+    "script": "ml/model_registry.py"
+  },
+  "model_hyperparameters": {
+    "logistic_regression_fingerprints": {
+      "task_type": "classification",
+      "feature_type": "fingerprints",
+      "estimator": "sklearn.linear_model.LogisticRegression",
+      "hyperparameters": {
+        "max_iter": 1000,
+        "random_state": 42
+      },
+      "source": "ml/model_registry.py:build_classifier"
+    },
+    "random_forest_descriptors": {
+      "task_type": "classification",
+      "feature_type": "descriptors",
+      "estimator": "sklearn.ensemble.RandomForestClassifier",
+      "hyperparameters": {
+        "n_estimators": 200,
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "source": "ml/model_registry.py:build_classifier"
+    },
+    "xgboost_tuned": {
+      "classification": {
+        "feature_type": "descriptors",
+        "estimator": "xgboost.XGBClassifier",
+        "hyperparameters": {
+          "random_state": 42,
+          "n_jobs": -1,
+          "scale_pos_weight": "train negatives / max(train positives, 1) - computed per task, not fixed",
+          "eval_metric": "logloss"
+        },
+        "source": "ml/model_registry.py:build_classifier"
+      },
+      "regression": {
+        "feature_type": "descriptors",
+        "estimator": "xgboost.XGBRegressor",
+        "hyperparameters": {
+          "random_state": 42,
+          "n_jobs": -1,
+          "max_depth": 3,
+          "n_estimators": 300,
+          "learning_rate": 0.05
+        },
+        "source": "ml/model_registry.py:retrain_regressor (these exact values were selected as the best of a small fixed grid in ml/experiments_per_task_models.py's REGRESSION_GRID by val RMSE - see ml/results/per_task_xgboost_metrics.json - and then hardcoded into retrain_regressor as the production choice for solubility)."
+      }
+    },
+    "ridge_descriptors": {
+      "task_type": "regression",
+      "feature_type": "descriptors",
+      "estimator": "sklearn.linear_model.Ridge",
+      "hyperparameters": {
+        "alpha": 1.0,
+        "random_state": 42
+      },
+      "preprocessing": "sklearn.preprocessing.StandardScaler fit on the train split only",
+      "source": "ml/model_registry.py:retrain_regressor"
+    }
+  },
+  "tasks": {
+    "solubility": {
+      "model_name": "xgboost_tuned",
+      "task_type": "regression",
+      "feature_type": "descriptors",
+      "hyperparameters": {
+        "random_state": 42,
+        "n_jobs": -1,
+        "max_depth": 3,
+        "n_estimators": 300,
+        "learning_rate": 0.05
+      },
+      "hyperparameters_source": "ml/model_registry.py:retrain_regressor (these exact values were selected as the best of a small fixed grid in ml/experiments_per_task_models.py's REGRESSION_GRID by val RMSE - see ml/results/per_task_xgboost_metrics.json - and then hardcoded into retrain_regressor as the production choice for solubility).",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG"
+    },
+    "NR-AR": {
+      "model_name": "random_forest_descriptors",
+      "task_type": "classification",
+      "feature_type": "descriptors",
+      "hyperparameters": {
+        "n_estimators": 200,
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "NR-AR-LBD": {
+      "model_name": "random_forest_descriptors",
+      "task_type": "classification",
+      "feature_type": "descriptors",
+      "hyperparameters": {
+        "n_estimators": 200,
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "NR-AhR": {
+      "model_name": "logistic_regression_fingerprints",
+      "task_type": "classification",
+      "feature_type": "fingerprints",
+      "hyperparameters": {
+        "max_iter": 1000,
+        "random_state": 42
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "NR-Aromatase": {
+      "model_name": "logistic_regression_fingerprints",
+      "task_type": "classification",
+      "feature_type": "fingerprints",
+      "hyperparameters": {
+        "max_iter": 1000,
+        "random_state": 42
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "NR-ER": {
+      "model_name": "logistic_regression_fingerprints",
+      "task_type": "classification",
+      "feature_type": "fingerprints",
+      "hyperparameters": {
+        "max_iter": 1000,
+        "random_state": 42
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "NR-ER-LBD": {
+      "model_name": "random_forest_descriptors",
+      "task_type": "classification",
+      "feature_type": "descriptors",
+      "hyperparameters": {
+        "n_estimators": 200,
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "NR-PPAR-gamma": {
+      "model_name": "logistic_regression_fingerprints",
+      "task_type": "classification",
+      "feature_type": "fingerprints",
+      "hyperparameters": {
+        "max_iter": 1000,
+        "random_state": 42
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "SR-ARE": {
+      "model_name": "random_forest_descriptors",
+      "task_type": "classification",
+      "feature_type": "descriptors",
+      "hyperparameters": {
+        "n_estimators": 200,
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "SR-ATAD5": {
+      "model_name": "random_forest_descriptors",
+      "task_type": "classification",
+      "feature_type": "descriptors",
+      "hyperparameters": {
+        "n_estimators": 200,
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "SR-HSE": {
+      "model_name": "random_forest_descriptors",
+      "task_type": "classification",
+      "feature_type": "descriptors",
+      "hyperparameters": {
+        "n_estimators": 200,
+        "random_state": 42,
+        "n_jobs": -1
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "SR-MMP": {
+      "model_name": "xgboost_tuned",
+      "task_type": "classification",
+      "feature_type": "descriptors",
+      "hyperparameters": {
+        "random_state": 42,
+        "n_jobs": -1,
+        "scale_pos_weight": "train negatives / max(train positives, 1) - computed per task, not fixed",
+        "eval_metric": "logloss"
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "SR-p53": {
+      "model_name": "xgboost_tuned",
+      "task_type": "classification",
+      "feature_type": "descriptors",
+      "hyperparameters": {
+        "random_state": 42,
+        "n_jobs": -1,
+        "scale_pos_weight": "train negatives / max(train positives, 1) - computed per task, not fixed",
+        "eval_metric": "logloss"
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "fda_approved": {
+      "model_name": "logistic_regression_fingerprints",
+      "task_type": "classification",
+      "feature_type": "fingerprints",
+      "hyperparameters": {
+        "max_iter": 1000,
+        "random_state": 42
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "ct_tox": {
+      "model_name": "logistic_regression_fingerprints",
+      "task_type": "classification",
+      "feature_type": "fingerprints",
+      "hyperparameters": {
+        "max_iter": 1000,
+        "random_state": 42
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    },
+    "bbbp_penetration": {
+      "model_name": "logistic_regression_fingerprints",
+      "task_type": "classification",
+      "feature_type": "fingerprints",
+      "hyperparameters": {
+        "max_iter": 1000,
+        "random_state": 42
+      },
+      "hyperparameters_source": "ml/model_registry.py:build_classifier",
+      "split": "train (fit) / val (model + hyperparameter selection) / test (final report only) - see SPLIT_CONFIG",
+      "calibration": {
+        "applied_to": "every classification task's final registered model",
+        "method": "Platt scaling (sigmoid) via sklearn CalibratedClassifierCV",
+        "cv_folds": "3, or 2 if the minority class has fewer than 6 examples in the train split",
+        "rationale": "Platt scaling won 3/4 tasks explored in ml/calibration.py's isotonic-vs-Platt comparison (ml/results/calibration_report.md) - applied here as the default for all 15 classification tasks, not re-verified individually per task.",
+        "script": "ml/model_registry.py"
+      }
+    }
+  }
+}
