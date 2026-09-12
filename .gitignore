@@ -12,6 +12,7 @@ data/raw/
 data/processed/
 models/**/*.pkl
 models/**/*.pt
+models/**/*.joblib
 .pytest_cache/
 .coverage
 

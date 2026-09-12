@@ -1,0 +1,191 @@
+{
+  "model_version": "0.1.0",
+  "trained_at": "2026-09-12T09:52:45.326573+00:00",
+  "dataset": "ESOL + Tox21 + ClinTox + BBBP (MoleculeNet)",
+  "per_task_winners": {
+    "solubility": {
+      "model_name": "xgboost_tuned",
+      "val": {
+        "rmse": 0.709025466198621,
+        "mae": 0.5696214341546606,
+        "r2": 0.773954168051181
+      },
+      "test": {
+        "rmse": 0.903730691913018,
+        "mae": 0.6407695514159994,
+        "r2": 0.8731438593980484
+      }
+    },
+    "NR-AR": {
+      "model_name": "random_forest_descriptors",
+      "val": {
+        "roc_auc": 0.8229058897428319,
+        "pr_auc": 0.5096466111045872
+      },
+      "test": {
+        "roc_auc": 0.6980618466898956,
+        "pr_auc": 0.23447738835203955
+      }
+    },
+    "NR-AR-LBD": {
+      "model_name": "random_forest_descriptors",
+      "val": {
+        "roc_auc": 0.8744204393737104,
+        "pr_auc": 0.6370409918677132
+      },
+      "test": {
+        "roc_auc": 0.8403195488721804,
+        "pr_auc": 0.30101034767994805
+      }
+    },
+    "NR-AhR": {
+      "model_name": "logistic_regression_fingerprints",
+      "val": {
+        "roc_auc": 0.7542973890417514,
+        "pr_auc": 0.3843131623903724
+      },
+      "test": {
+        "roc_auc": 0.8603456815871113,
+        "pr_auc": 0.5227853399233989
+      }
+    },
+    "NR-Aromatase": {
+      "model_name": "logistic_regression_fingerprints",
+      "val": {
+        "roc_auc": 0.7031844929041191,
+        "pr_auc": 0.13202954792360388
+      },
+      "test": {
+        "roc_auc": 0.6188938938938939,
+        "pr_auc": 0.20629864530861686
+      }
+    },
+    "NR-ER": {
+      "model_name": "logistic_regression_fingerprints",
+      "val": {
+        "roc_auc": 0.6230764563106795,
+        "pr_auc": 0.25767134256328644
+      },
+      "test": {
+        "roc_auc": 0.6976273148148149,
+        "pr_auc": 0.3652897440318427
+      }
+    },
+    "NR-ER-LBD": {
+      "model_name": "random_forest_descriptors",
+      "val": {
+        "roc_auc": 0.7773969150115938,
+        "pr_auc": 0.3128919020584591
+      },
+      "test": {
+        "roc_auc": 0.750610649731314,
+        "pr_auc": 0.24379660790862856
+      }
+    },
+    "NR-PPAR-gamma": {
+      "model_name": "logistic_regression_fingerprints",
+      "val": {
+        "roc_auc": 0.7295398428731762,
+        "pr_auc": 0.11508003852122324
+      },
+      "test": {
+        "roc_auc": 0.8150496723737054,
+        "pr_auc": 0.37683370686071005
+      }
+    },
+    "SR-ARE": {
+      "model_name": "random_forest_descriptors",
+      "val": {
+        "roc_auc": 0.7412241097127378,
+        "pr_auc": 0.3986714539065375
+      },
+      "test": {
+        "roc_auc": 0.763361028462359,
+        "pr_auc": 0.42585668455747816
+      }
+    },
+    "SR-ATAD5": {
+      "model_name": "random_forest_descriptors",
+      "val": {
+        "roc_auc": 0.6655940724363024,
+        "pr_auc": 0.1506232419626579
+      },
+      "test": {
+        "roc_auc": 0.74139371657754,
+        "pr_auc": 0.18534822900919187
+      }
+    },
+    "SR-HSE": {
+      "model_name": "random_forest_descriptors",
+      "val": {
+        "roc_auc": 0.7086889797044471,
+        "pr_auc": 0.19094122604105
+      },
+      "test": {
+        "roc_auc": 0.6847335140018067,
+        "pr_auc": 0.12168514165654475
+      }
+    },
+    "SR-MMP": {
+      "model_name": "xgboost_tuned",
+      "val": {
+        "roc_auc": 0.7807752580290721,
+        "pr_auc": 0.5136708407350609
+      },
+      "test": {
+        "roc_auc": 0.7864086687306502,
+        "pr_auc": 0.498029690967786
+      }
+    },
+    "SR-p53": {
+      "model_name": "xgboost_tuned",
+      "val": {
+        "roc_auc": 0.7451958179925743,
+        "pr_auc": 0.1986038173649071
+      },
+      "test": {
+        "roc_auc": 0.7835673811283568,
+        "pr_auc": 0.26114221781811997
+      }
+    },
+    "fda_approved": {
+      "model_name": "logistic_regression_fingerprints",
+      "val": {
+        "roc_auc": 0.8361344537815126,
+        "pr_auc": 0.989342965488834
+      },
+      "test": {
+        "roc_auc": 0.7927580893682589,
+        "pr_auc": 0.9724828354127895
+      }
+    },
+    "ct_tox": {
+      "model_name": "logistic_regression_fingerprints",
+      "val": {
+        "roc_auc": 0.8258636788048552,
+        "pr_auc": 0.3985739539482864
+      },
+      "test": {
+        "roc_auc": 0.7689075630252101,
+        "pr_auc": 0.2586067862580039
+      }
+    },
+    "bbbp_penetration": {
+      "model_name": "logistic_regression_fingerprints",
+      "val": {
+        "roc_auc": 0.8177655677655677,
+        "pr_auc": 0.9128859919351003
+      },
+      "test": {
+        "roc_auc": 0.8556067588325652,
+        "pr_auc": 0.9379905605430104
+      }
+    }
+  },
+  "tasks_without_a_registered_model": [],
+  "known_limitations": [
+    "Per-task models, not a true multi-task architecture - each task's winner is trained independently (see ml/TODO_experiments_multitask.md for the planned multi-task comparison, not yet done).",
+    "Calibrated via Platt scaling (sigmoid) for every classification task - chosen because it won 3/4 tasks explored in ml/results/calibration_report.md; not re-verified per-task here, so a specific task's calibration quality may differ from those 4 explored cases.",
+    "These 4 source datasets barely overlap by molecule - most training examples for any one task come from a single source dataset, so cross-task generalization claims should not be assumed."
+  ]
+}

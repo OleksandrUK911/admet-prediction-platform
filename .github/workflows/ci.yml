@@ -40,6 +40,9 @@ jobs:
       - name: Run calibration + applicability domain
         run: python ml/calibration.py
 
+      - name: Run model registry
+        run: python ml/model_registry.py
+
       - name: Test (pytest)
         run: pytest ml/tests/ -v
 
