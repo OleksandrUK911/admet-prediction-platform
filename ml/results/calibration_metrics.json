@@ -1,0 +1,146 @@
+[
+  {
+    "calibration": [
+      {
+        "task": "NR-AR",
+        "method": "raw_rf",
+        "n_val": 1660,
+        "ece": 0.012197665662650601,
+        "roc_auc": 0.8075718666863732
+      },
+      {
+        "task": "NR-AR",
+        "method": "platt_sigmoid",
+        "n_val": 1660,
+        "ece": 0.01601445223999453,
+        "roc_auc": 0.8223516479456103
+      },
+      {
+        "task": "NR-AR",
+        "method": "isotonic",
+        "n_val": 1660,
+        "ece": 0.012873211329062684,
+        "roc_auc": 0.812463050546852
+      }
+    ],
+    "applicability_domain": {
+      "task": "NR-AR",
+      "n_test": 598,
+      "ood_threshold_distance": 0.7684469922607483,
+      "n_ood": 60,
+      "ood_accuracy": 0.95,
+      "in_domain_accuracy": 0.9591078066914498,
+      "ood_mean_nn_distance": 1.5135391577514758,
+      "in_domain_mean_nn_distance": 0.3099865724195741
+    },
+    "trained_at": "2026-09-12T09:39:18.301431+00:00"
+  },
+  {
+    "calibration": [
+      {
+        "task": "SR-MMP",
+        "method": "raw_rf",
+        "n_val": 1378,
+        "ece": 0.08049800723385629,
+        "roc_auc": 0.7827836518543869
+      },
+      {
+        "task": "SR-MMP",
+        "method": "platt_sigmoid",
+        "n_val": 1378,
+        "ece": 0.07464104006408732,
+        "roc_auc": 0.7680782463029341
+      },
+      {
+        "task": "SR-MMP",
+        "method": "isotonic",
+        "n_val": 1378,
+        "ece": 0.07913077992588025,
+        "roc_auc": 0.770544157645406
+      }
+    ],
+    "applicability_domain": {
+      "task": "SR-MMP",
+      "n_test": 465,
+      "ood_threshold_distance": 0.6924116719249266,
+      "n_ood": 47,
+      "ood_accuracy": 0.7659574468085106,
+      "in_domain_accuracy": 0.854066985645933,
+      "ood_mean_nn_distance": 1.3154627742270073,
+      "in_domain_mean_nn_distance": 0.30809574273946844
+    },
+    "trained_at": "2026-09-12T09:39:18.301431+00:00"
+  },
+  {
+    "calibration": [
+      {
+        "task": "bbbp_penetration",
+        "method": "raw_rf",
+        "n_val": 260,
+        "ece": 0.09093649267399272,
+        "roc_auc": 0.81389123696816
+      },
+      {
+        "task": "bbbp_penetration",
+        "method": "platt_sigmoid",
+        "n_val": 260,
+        "ece": 0.08484495358928065,
+        "roc_auc": 0.8044519582981122
+      },
+      {
+        "task": "bbbp_penetration",
+        "method": "isotonic",
+        "n_val": 260,
+        "ece": 0.09324858509210313,
+        "roc_auc": 0.8080092983939138
+      }
+    ],
+    "applicability_domain": {
+      "task": "bbbp_penetration",
+      "n_test": 166,
+      "ood_threshold_distance": 0.8947150636010297,
+      "n_ood": 17,
+      "ood_accuracy": 0.6470588235294118,
+      "in_domain_accuracy": 0.87248322147651,
+      "ood_mean_nn_distance": 1.5812073170200538,
+      "in_domain_mean_nn_distance": 0.4023533098421022
+    },
+    "trained_at": "2026-09-12T09:39:18.301431+00:00"
+  },
+  {
+    "calibration": [
+      {
+        "task": "ct_tox",
+        "method": "raw_rf",
+        "n_val": 269,
+        "ece": 0.033494423791821555,
+        "roc_auc": 0.6937441643323997
+      },
+      {
+        "task": "ct_tox",
+        "method": "platt_sigmoid",
+        "n_val": 269,
+        "ece": 0.015198198657022991,
+        "roc_auc": 0.7268907563025211
+      },
+      {
+        "task": "ct_tox",
+        "method": "isotonic",
+        "n_val": 269,
+        "ece": 0.025913232407202336,
+        "roc_auc": 0.7216386554621849
+      }
+    ],
+    "applicability_domain": {
+      "task": "ct_tox",
+      "n_test": 129,
+      "ood_threshold_distance": 0.6814247619046289,
+      "n_ood": 13,
+      "ood_accuracy": 0.9230769230769231,
+      "in_domain_accuracy": 0.9224137931034483,
+      "ood_mean_nn_distance": 1.5398330362613284,
+      "in_domain_mean_nn_distance": 0.34723833428692263
+    },
+    "trained_at": "2026-09-12T09:39:18.301431+00:00"
+  }
+]
