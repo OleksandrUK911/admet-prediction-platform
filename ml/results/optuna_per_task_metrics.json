@@ -1,0 +1,102 @@
+[
+  {
+    "task": "fda_approved",
+    "best_params": {
+      "n_estimators": 500,
+      "max_depth": 2,
+      "learning_rate": 0.010511554895620032,
+      "min_child_weight": 1,
+      "subsample": 0.7067070498463563,
+      "colsample_bytree": 0.6736624729022084
+    },
+    "best_cv_pr_auc": 0.9757141879193106,
+    "n_trials": 30,
+    "splits": {
+      "val": {
+        "roc_auc": 0.6787114845938375,
+        "pr_auc": 0.9723611095900214
+      },
+      "test": {
+        "roc_auc": 0.5077041602465331,
+        "pr_auc": 0.9204675930765055
+      }
+    },
+    "model_name": "xgboost_optuna",
+    "trained_at": "2026-09-12T13:05:41.715289+00:00"
+  },
+  {
+    "task": "SR-ATAD5",
+    "best_params": {
+      "n_estimators": 100,
+      "max_depth": 6,
+      "learning_rate": 0.04022478267025548,
+      "min_child_weight": 10,
+      "subsample": 0.8362897495566304,
+      "colsample_bytree": 0.8736970936526043
+    },
+    "best_cv_pr_auc": 0.17807255169702293,
+    "n_trials": 30,
+    "splits": {
+      "val": {
+        "roc_auc": 0.6582635818066962,
+        "pr_auc": 0.10675963311271279
+      },
+      "test": {
+        "roc_auc": 0.684659090909091,
+        "pr_auc": 0.14642518785410585
+      }
+    },
+    "model_name": "xgboost_optuna",
+    "trained_at": "2026-09-12T13:05:41.715289+00:00"
+  },
+  {
+    "task": "NR-PPAR-gamma",
+    "best_params": {
+      "n_estimators": 100,
+      "max_depth": 8,
+      "learning_rate": 0.07725378389307355,
+      "min_child_weight": 8,
+      "subsample": 0.5102922471479012,
+      "colsample_bytree": 0.9849549260809971
+    },
+    "best_cv_pr_auc": 0.16363235464485792,
+    "n_trials": 30,
+    "splits": {
+      "val": {
+        "roc_auc": 0.7286868686868686,
+        "pr_auc": 0.11284465755127415
+      },
+      "test": {
+        "roc_auc": 0.7730923694779116,
+        "pr_auc": 0.22302283502246864
+      }
+    },
+    "model_name": "xgboost_optuna",
+    "trained_at": "2026-09-12T13:05:41.715289+00:00"
+  },
+  {
+    "task": "SR-MMP",
+    "best_params": {
+      "n_estimators": 550,
+      "max_depth": 6,
+      "learning_rate": 0.026872990685044472,
+      "min_child_weight": 2,
+      "subsample": 0.8085555399405733,
+      "colsample_bytree": 0.9451188938960129
+    },
+    "best_cv_pr_auc": 0.6694474941458186,
+    "n_trials": 30,
+    "splits": {
+      "val": {
+        "roc_auc": 0.7785885404470704,
+        "pr_auc": 0.5430914218622868
+      },
+      "test": {
+        "roc_auc": 0.7851083591331269,
+        "pr_auc": 0.5178304662965622
+      }
+    },
+    "model_name": "xgboost_optuna",
+    "trained_at": "2026-09-12T13:05:41.715289+00:00"
+  }
+]
