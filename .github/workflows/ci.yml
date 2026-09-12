@@ -31,6 +31,9 @@ jobs:
       - name: Run baseline models
         run: python ml/baseline.py
 
+      - name: Run per-task XGBoost experiments
+        run: python ml/experiments_per_task_models.py
+
       - name: Test (pytest)
         run: pytest ml/tests/ -v
 
