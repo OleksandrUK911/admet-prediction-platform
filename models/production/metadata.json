@@ -1,6 +1,6 @@
 {
   "model_version": "0.1.0",
-  "trained_at": "2026-09-12T12:55:13.760114+00:00",
+  "trained_at": "2026-09-12T13:51:25.899902+00:00",
   "dataset": "ESOL + Tox21 + ClinTox + BBBP (MoleculeNet)",
   "per_task_winners": {
     "solubility": {
