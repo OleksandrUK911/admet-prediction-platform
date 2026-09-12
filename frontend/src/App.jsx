@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppShell } from "./components/AppShell";
 import { PredictPage } from "./pages/PredictPage";
+import { ComparePage } from "./pages/ComparePage";
 import { HistoryPage } from "./pages/HistoryPage";
 import { ProfileDetailPage } from "./pages/ProfileDetailPage";
 import { AboutPage } from "./pages/AboutPage";
@@ -28,6 +29,7 @@ export default function App() {
         <Routes>
           <Route element={<AppShell />}>
             <Route index element={<PredictPage />} />
+            <Route path="compare" element={<ComparePage />} />
             <Route path="history" element={<HistoryPage />} />
             <Route path="profile/:id" element={<ProfileDetailPage />} />
             <Route path="about" element={<AboutPage />} />

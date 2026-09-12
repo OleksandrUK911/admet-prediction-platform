@@ -166,3 +166,20 @@ button {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+
+/* Print stylesheet - the pragmatic PDF-export substitute for the
+   comparison page (window.print() -> browser's "Save as PDF"), instead of
+   pulling in a client-side PDF library - TODO_pages_flows.md ("Флоу
+   експорту результатів у PDF/CSV"). Hides interactive chrome (nav,
+   disclaimer banner, inputs, buttons) that has no meaning on paper. */
+@media print {
+  header,
+  footer,
+  .print-hide {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+}

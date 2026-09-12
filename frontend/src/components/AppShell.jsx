@@ -50,6 +50,7 @@ export function AppShell() {
     <div>
       <div
         role="alert"
+        className="print-hide"
         style={{
           background: "var(--disclaimer-bg)",
           color: "var(--disclaimer-text)",
@@ -77,6 +78,9 @@ export function AppShell() {
         <nav aria-label={t("common.mainNavigation")} style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
           <NavLink to="/" style={linkStyle} end>
             {t("nav.predict")}
+          </NavLink>
+          <NavLink to="/compare" style={linkStyle}>
+            {t("nav.compare")}
           </NavLink>
           <NavLink to="/history" style={linkStyle}>
             {t("nav.history")}

@@ -7,6 +7,7 @@
   },
   "nav": {
     "predict": "Predict",
+    "compare": "Compare",
     "history": "History",
     "about": "About"
   },
@@ -125,6 +126,28 @@
     },
     "disclaimerTitle": "Disclaimer",
     "disclaimerText": "Research/educational use only. Not for clinical or regulatory decision-making. Predictions include explicit confidence and applicability-domain indicators and must never be treated as medical, regulatory, or safety guidance."
+  },
+  "compare": {
+    "title": "Compare molecules",
+    "subtitle": "Enter 2–3 SMILES to compare their ADMET profiles side by side.",
+    "moleculeLabel": "Molecule {{index}}",
+    "removeButton": "Remove",
+    "removeMolecule": "Remove molecule {{index}}",
+    "addMolecule": "+ Add molecule",
+    "needAtLeastTwo": "Add at least 2 molecules to compare.",
+    "loadingMolecule": "Computing…",
+    "noSuccessfulYet": "No successful predictions yet to plot on the radar.",
+    "radarTitle": "Overlaid ADMET profile (5 axes)",
+    "tableTitle": "Comparison table (16 tasks)",
+    "tableCaption": "All 16 ADMET tasks, one column per molecule. The best value per row is marked ✓, the worst ⚠ — never by color alone.",
+    "columnEndpoint": "Endpoint",
+    "columnLargestDiff": "Largest difference",
+    "bestCell": "Best value in this row",
+    "worstCell": "Worst value in this row",
+    "errorCell": "Could not be computed for this molecule",
+    "pendingCell": "…",
+    "exportCsv": "Export as CSV",
+    "exportPrint": "Print / Save as PDF"
   },
   "errors": {
     "retry": "Retry",

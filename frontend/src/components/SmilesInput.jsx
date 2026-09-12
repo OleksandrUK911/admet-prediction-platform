@@ -1,6 +1,11 @@
 import { useTranslation } from "react-i18next";
 
-export function SmilesInput({ value, onChange, onSubmit, disabled }) {
+// `id` defaults to "smiles-input" for the single-instance case
+// (PredictPage); the comparison page renders several instances at once
+// and must pass a unique id per slot to keep label association valid
+// (duplicate DOM ids break getByLabelText/assistive tech) -
+// TODO_state_data_layer.md / comparison-page.md.
+export function SmilesInput({ value, onChange, onSubmit, disabled, id = "smiles-input" }) {
   const { t } = useTranslation();
   return (
     <form
@@ -10,11 +15,11 @@ export function SmilesInput({ value, onChange, onSubmit, disabled }) {
       }}
       style={{ display: "flex", gap: 8, flexWrap: "wrap" }}
     >
-      <label htmlFor="smiles-input" className="visually-hidden">
+      <label htmlFor={id} className="visually-hidden">
         {t("predict.smilesLabel")}
       </label>
       <input
-        id="smiles-input"
+        id={id}
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
