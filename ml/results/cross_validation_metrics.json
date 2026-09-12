@@ -1,0 +1,212 @@
+[
+  {
+    "task": "solubility",
+    "fold": 0,
+    "metric_name": "rmse",
+    "value": 0.6806098045674233
+  },
+  {
+    "task": "solubility",
+    "fold": 0,
+    "metric_name": "mae",
+    "value": 0.49345223075738676
+  },
+  {
+    "task": "solubility",
+    "fold": 0,
+    "metric_name": "r2",
+    "value": 0.8759590719419694
+  },
+  {
+    "task": "solubility",
+    "fold": 1,
+    "metric_name": "rmse",
+    "value": 0.7474379080704292
+  },
+  {
+    "task": "solubility",
+    "fold": 1,
+    "metric_name": "mae",
+    "value": 0.5631083053534869
+  },
+  {
+    "task": "solubility",
+    "fold": 1,
+    "metric_name": "r2",
+    "value": 0.8734641394467595
+  },
+  {
+    "task": "solubility",
+    "fold": 2,
+    "metric_name": "rmse",
+    "value": 0.6276872573737231
+  },
+  {
+    "task": "solubility",
+    "fold": 2,
+    "metric_name": "mae",
+    "value": 0.47774465163583213
+  },
+  {
+    "task": "solubility",
+    "fold": 2,
+    "metric_name": "r2",
+    "value": 0.8867770455477249
+  },
+  {
+    "task": "solubility",
+    "fold": 3,
+    "metric_name": "rmse",
+    "value": 0.7470932228109145
+  },
+  {
+    "task": "solubility",
+    "fold": 3,
+    "metric_name": "mae",
+    "value": 0.5611908324434616
+  },
+  {
+    "task": "solubility",
+    "fold": 3,
+    "metric_name": "r2",
+    "value": 0.8737379178578982
+  },
+  {
+    "task": "solubility",
+    "fold": 4,
+    "metric_name": "rmse",
+    "value": 0.6956059603184046
+  },
+  {
+    "task": "solubility",
+    "fold": 4,
+    "metric_name": "mae",
+    "value": 0.5463239292317614
+  },
+  {
+    "task": "solubility",
+    "fold": 4,
+    "metric_name": "r2",
+    "value": 0.8679685716128425
+  },
+  {
+    "task": "SR-MMP",
+    "fold": 0,
+    "metric_name": "roc_auc",
+    "value": 0.8722273327753993
+  },
+  {
+    "task": "SR-MMP",
+    "fold": 0,
+    "metric_name": "pr_auc",
+    "value": 0.6327253891008537
+  },
+  {
+    "task": "SR-MMP",
+    "fold": 1,
+    "metric_name": "roc_auc",
+    "value": 0.8789193690469636
+  },
+  {
+    "task": "SR-MMP",
+    "fold": 1,
+    "metric_name": "pr_auc",
+    "value": 0.6981983548754301
+  },
+  {
+    "task": "SR-MMP",
+    "fold": 2,
+    "metric_name": "roc_auc",
+    "value": 0.8808842151626933
+  },
+  {
+    "task": "SR-MMP",
+    "fold": 2,
+    "metric_name": "pr_auc",
+    "value": 0.588695308874438
+  },
+  {
+    "task": "SR-MMP",
+    "fold": 3,
+    "metric_name": "roc_auc",
+    "value": 0.8951474150746022
+  },
+  {
+    "task": "SR-MMP",
+    "fold": 3,
+    "metric_name": "pr_auc",
+    "value": 0.6780456043656452
+  },
+  {
+    "task": "SR-MMP",
+    "fold": 4,
+    "metric_name": "roc_auc",
+    "value": 0.8820541760722348
+  },
+  {
+    "task": "SR-MMP",
+    "fold": 4,
+    "metric_name": "pr_auc",
+    "value": 0.6442707456388946
+  },
+  {
+    "task": "bbbp_penetration",
+    "fold": 0,
+    "metric_name": "roc_auc",
+    "value": 0.8946623187162104
+  },
+  {
+    "task": "bbbp_penetration",
+    "fold": 0,
+    "metric_name": "pr_auc",
+    "value": 0.9534683528168069
+  },
+  {
+    "task": "bbbp_penetration",
+    "fold": 1,
+    "metric_name": "roc_auc",
+    "value": 0.9202780399897023
+  },
+  {
+    "task": "bbbp_penetration",
+    "fold": 1,
+    "metric_name": "pr_auc",
+    "value": 0.9719445152744781
+  },
+  {
+    "task": "bbbp_penetration",
+    "fold": 2,
+    "metric_name": "roc_auc",
+    "value": 0.9015275036471295
+  },
+  {
+    "task": "bbbp_penetration",
+    "fold": 2,
+    "metric_name": "pr_auc",
+    "value": 0.960126438796753
+  },
+  {
+    "task": "bbbp_penetration",
+    "fold": 3,
+    "metric_name": "roc_auc",
+    "value": 0.8991100499240287
+  },
+  {
+    "task": "bbbp_penetration",
+    "fold": 3,
+    "metric_name": "pr_auc",
+    "value": 0.9602438566083965
+  },
+  {
+    "task": "bbbp_penetration",
+    "fold": 4,
+    "metric_name": "roc_auc",
+    "value": 0.9020241171403962
+  },
+  {
+    "task": "bbbp_penetration",
+    "fold": 4,
+    "metric_name": "pr_auc",
+    "value": 0.9603042843264811
+  }
+]
