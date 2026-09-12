@@ -96,6 +96,14 @@ def test_failed_prediction_does_not_write_history():
     assert response.json() == []
 
 
+def test_metrics_returns_prometheus_text_after_a_request():
+    with TestClient(app) as client:
+        client.get("/health")
+        response = client.get("/metrics")
+    assert response.status_code == 200
+    assert "http_requests_total" in response.text
+
+
 def test_rate_limit_returns_429_after_threshold():
     with TestClient(app) as client:
         responses = [client.post("/admet-profile", json={"smiles": "CCO"}) for _ in range(31)]
