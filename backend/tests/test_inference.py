@@ -104,6 +104,24 @@ def test_predict_rejects_molecule_over_max_heavy_atoms(service):
         service.predict(long_chain_smiles)
 
 
+def test_predict_completes_quickly_for_molecule_near_size_cap(service):
+    """Performance/timeout guard for the largest molecules we still accept
+    (just under MAX_HEAVY_ATOMS) - see TODO/backend/TODO_testing.md. This
+    isn't a hard SLA, just a regression guard against an accidental O(n^2)+
+    blowup in descriptor/fingerprint computation for large-but-valid input."""
+    import time
+
+    service.clear_cache()
+    large_chain_smiles = "C" * (MAX_HEAVY_ATOMS - 1)
+
+    start = time.perf_counter()
+    result = service.predict(large_chain_smiles)
+    elapsed = time.perf_counter() - start
+
+    assert result["profile"]["solubility"]["value"] is not None
+    assert elapsed < 5.0, f"prediction for a near-size-cap molecule took {elapsed:.2f}s (expected < 5s)"
+
+
 def test_predict_cache_hit_returns_same_profile_but_fresh_id(service):
     """Cache key is (canonical_smiles, model_version) - see
     TODO/backend/TODO_database.md. A repeat call for the same molecule must
