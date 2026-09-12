@@ -1,0 +1,362 @@
+[
+  {
+    "task": "solubility",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "n_samples": 294,
+    "best_params": {
+      "n_estimators": 300,
+      "max_depth": 3,
+      "learning_rate": 0.05
+    },
+    "rmse": 0.709025466198621,
+    "mae": 0.5696214341546606,
+    "r2": 0.773954168051181
+  },
+  {
+    "task": "solubility",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "n_samples": 104,
+    "best_params": {
+      "n_estimators": 300,
+      "max_depth": 3,
+      "learning_rate": 0.05
+    },
+    "rmse": 0.903730691913018,
+    "mae": 0.6407695514159994,
+    "r2": 0.8731438593980484
+  },
+  {
+    "task": "NR-AR",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 22.565217391304348,
+    "roc_auc": 0.7608215710907478,
+    "pr_auc": 0.4931157952450693,
+    "n_positive": 68,
+    "n_total": 1660
+  },
+  {
+    "task": "NR-AR",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 22.565217391304348,
+    "roc_auc": 0.7065911730545876,
+    "pr_auc": 0.17351211534714617,
+    "n_positive": 24,
+    "n_total": 598
+  },
+  {
+    "task": "NR-AR-LBD",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 26.509090909090908,
+    "roc_auc": 0.8601043815997088,
+    "pr_auc": 0.6062140636816141,
+    "n_positive": 55,
+    "n_total": 1553
+  },
+  {
+    "task": "NR-AR-LBD",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 26.509090909090908,
+    "roc_auc": 0.830357142857143,
+    "pr_auc": 0.3946097772875951,
+    "n_positive": 10,
+    "n_total": 542
+  },
+  {
+    "task": "NR-AhR",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 8.516129032258064,
+    "roc_auc": 0.6972462316066517,
+    "pr_auc": 0.3140756096896091,
+    "n_positive": 208,
+    "n_total": 1494
+  },
+  {
+    "task": "NR-AhR",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 8.516129032258064,
+    "roc_auc": 0.7543340545895357,
+    "pr_auc": 0.45770327705939723,
+    "n_positive": 89,
+    "n_total": 520
+  },
+  {
+    "task": "NR-Aromatase",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 18.034146341463416,
+    "roc_auc": 0.7679646936656283,
+    "pr_auc": 0.11111170332383438,
+    "n_positive": 45,
+    "n_total": 1329
+  },
+  {
+    "task": "NR-Aromatase",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 18.034146341463416,
+    "roc_auc": 0.7505505505505505,
+    "pr_auc": 0.1963911915414966,
+    "n_positive": 45,
+    "n_total": 489
+  },
+  {
+    "task": "NR-ER",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 7.240079365079365,
+    "roc_auc": 0.6218547734627832,
+    "pr_auc": 0.3075041710652052,
+    "n_positive": 200,
+    "n_total": 1436
+  },
+  {
+    "task": "NR-ER",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 7.240079365079365,
+    "roc_auc": 0.6560329861111113,
+    "pr_auc": 0.21681839089131782,
+    "n_positive": 64,
+    "n_total": 496
+  },
+  {
+    "task": "NR-ER-LBD",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 18.70464135021097,
+    "roc_auc": 0.7244261854353597,
+    "pr_auc": 0.22992405420063122,
+    "n_positive": 78,
+    "n_total": 1604
+  },
+  {
+    "task": "NR-ER-LBD",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 18.70464135021097,
+    "roc_auc": 0.7108777072138088,
+    "pr_auc": 0.19363634170799685,
+    "n_positive": 23,
+    "n_total": 557
+  },
+  {
+    "task": "NR-PPAR-gamma",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 30.94074074074074,
+    "roc_auc": 0.6798092031425365,
+    "pr_auc": 0.10207794086227881,
+    "n_positive": 30,
+    "n_total": 1515
+  },
+  {
+    "task": "NR-PPAR-gamma",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 30.94074074074074,
+    "roc_auc": 0.8216021982667511,
+    "pr_auc": 0.2067135369998677,
+    "n_positive": 19,
+    "n_total": 517
+  },
+  {
+    "task": "SR-ARE",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 5.036050156739812,
+    "roc_auc": 0.7158175646803673,
+    "pr_auc": 0.3516767878801695,
+    "n_positive": 203,
+    "n_total": 1425
+  },
+  {
+    "task": "SR-ARE",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 5.036050156739812,
+    "roc_auc": 0.7000364902037838,
+    "pr_auc": 0.3742124042301809,
+    "n_positive": 94,
+    "n_total": 473
+  },
+  {
+    "task": "SR-ATAD5",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 23.729166666666668,
+    "roc_auc": 0.6723586544535691,
+    "pr_auc": 0.12336728756507172,
+    "n_positive": 48,
+    "n_total": 1631
+  },
+  {
+    "task": "SR-ATAD5",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 23.729166666666668,
+    "roc_auc": 0.6833221925133691,
+    "pr_auc": 0.14101104422500413,
+    "n_positive": 22,
+    "n_total": 566
+  },
+  {
+    "task": "SR-HSE",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 15.319391634980988,
+    "roc_auc": 0.6264204300519028,
+    "pr_auc": 0.1374993932973528,
+    "n_positive": 78,
+    "n_total": 1565
+  },
+  {
+    "task": "SR-HSE",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 15.319391634980988,
+    "roc_auc": 0.5755796446853357,
+    "pr_auc": 0.09533407998656343,
+    "n_positive": 27,
+    "n_total": 519
+  },
+  {
+    "task": "SR-MMP",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 5.755671902268761,
+    "roc_auc": 0.7756272853360233,
+    "pr_auc": 0.5129001519916262,
+    "n_positive": 245,
+    "n_total": 1378
+  },
+  {
+    "task": "SR-MMP",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 5.755671902268761,
+    "roc_auc": 0.7583591331269349,
+    "pr_auc": 0.4802034316700246,
+    "n_positive": 85,
+    "n_total": 465
+  },
+  {
+    "task": "SR-p53",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 14.530821917808218,
+    "roc_auc": 0.7391527240527567,
+    "pr_auc": 0.2405014801019048,
+    "n_positive": 86,
+    "n_total": 1583
+  },
+  {
+    "task": "SR-p53",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 14.530821917808218,
+    "roc_auc": 0.76440009854644,
+    "pr_auc": 0.29599546658754783,
+    "n_positive": 41,
+    "n_total": 536
+  },
+  {
+    "task": "fda_approved",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 0.06632124352331606,
+    "roc_auc": 0.7134453781512604,
+    "pr_auc": 0.9752568017725056,
+    "n_positive": 255,
+    "n_total": 269
+  },
+  {
+    "task": "fda_approved",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 0.06632124352331606,
+    "roc_auc": 0.5724191063174114,
+    "pr_auc": 0.9213243989319451,
+    "n_positive": 118,
+    "n_total": 129
+  },
+  {
+    "task": "ct_tox",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 17.05263157894737,
+    "roc_auc": 0.7224556489262371,
+    "pr_auc": 0.15709414356464993,
+    "n_positive": 17,
+    "n_total": 269
+  },
+  {
+    "task": "ct_tox",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 17.05263157894737,
+    "roc_auc": 0.6983193277310925,
+    "pr_auc": 0.19108963893161404,
+    "n_positive": 10,
+    "n_total": 129
+  },
+  {
+    "task": "bbbp_penetration",
+    "model_name": "xgboost_tuned",
+    "split": "val",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 0.29948805460750855,
+    "roc_auc": 0.7769089884474499,
+    "pr_auc": 0.8758430653399844,
+    "n_positive": 182,
+    "n_total": 260
+  },
+  {
+    "task": "bbbp_penetration",
+    "model_name": "xgboost_tuned",
+    "split": "test",
+    "trained_at": "2026-09-12T09:38:52.404963+00:00",
+    "scale_pos_weight": 0.29948805460750855,
+    "roc_auc": 0.8498463901689708,
+    "pr_auc": 0.9401986780178209,
+    "n_positive": 124,
+    "n_total": 166
+  }
+]
