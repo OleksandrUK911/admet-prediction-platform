@@ -1,0 +1,135 @@
+{
+  "common": {
+    "appTitle": "ADMET Prediction",
+    "mainNavigation": "Main navigation",
+    "disclaimerBanner": "Research/educational use only — not for clinical or regulatory decision-making.",
+    "footerDisclaimerLink": "Disclaimer & methodology"
+  },
+  "nav": {
+    "predict": "Predict",
+    "history": "History",
+    "about": "About"
+  },
+  "theme": {
+    "toggleToLight": "Switch to light theme",
+    "toggleToDark": "Switch to dark theme"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "predict": {
+    "title": "Predict an ADMET profile",
+    "predicting": "Computing the 16-task ADMET profile…",
+    "smilesLabel": "SMILES string",
+    "submitButton": "Predict",
+    "examplesLabel": "Try an example:"
+  },
+  "results": {
+    "smilesLabel": "SMILES",
+    "radarTitle": "ADMET profile (5 axes)",
+    "applicabilityDomainTitle": "Applicability domain",
+    "profileTitle": "Per-endpoint results"
+  },
+  "profileDetail": {
+    "title": "Saved profile",
+    "loading": "Loading saved profile…"
+  },
+  "radar": {
+    "solubility": "Solubility",
+    "bbb_penetration": "BBB Penetration",
+    "toxicity_tox21": "Toxicity (Tox21)",
+    "clinical_trial_toxicity": "Clinical Trial Toxicity",
+    "fda_approval_likelihood": "FDA Approval Likelihood",
+    "tableCaption": "Values shown in the radar chart above (original, non-inverted values)",
+    "columnAxis": "Axis",
+    "columnValue": "Value"
+  },
+  "chart": {
+    "showTable": "View as table",
+    "hideTable": "Hide table"
+  },
+  "tasks": {
+    "solubility": "Solubility",
+    "bbbPenetration": "BBB Penetration",
+    "toxicityTox21": "Toxicity (Tox21 panel)",
+    "clinicalTrialToxicity": "Clinical Trial Toxicity",
+    "fdaApprovalLikelihood": "FDA Approval Likelihood"
+  },
+  "riskLevel": {
+    "low": "Low risk",
+    "moderate": "Moderate risk",
+    "high": "High risk"
+  },
+  "card": {
+    "noConfidence": "No calibrated confidence measure exists for this prediction.",
+    "confidenceLabel": "Confidence",
+    "confidenceTooltip": "The shaded band is a visual proxy for uncertainty (scaled by 1 − confidence), not a formal statistical confidence interval.",
+    "confidenceAriaLabel": "Confidence: {{value}}. The shaded band is a visual proxy for uncertainty, not a formal statistical confidence interval."
+  },
+  "applicabilityDomain": {
+    "inDomain": "Within known chemical space",
+    "outOfDomain": "Outside training distribution",
+    "inDomainTooltip": "This molecule's descriptors fall within the range seen in the training data.",
+    "outOfDomainTooltip": "This molecule's descriptors fall outside the range seen in the training data — treat predictions with extra caution. See the About page for details.",
+    "outOfDomainExplanation": "This molecule falls outside the training data's descriptor space, so every prediction below carries extra uncertainty beyond its stated confidence. See About → Known limitations.",
+    "cardOverlay": "Low confidence — outside training data distribution"
+  },
+  "tox21": {
+    "expanderTitle": "Toxicity (Tox21 panel) — click to expand 12 assays",
+    "aggregateConfidence": "Confidence in the aggregate risk score: {{value}}",
+    "tableCaption": "All 12 Tox21 assay probabilities, sorted highest-risk first",
+    "columnAssay": "Assay code",
+    "columnLabel": "What it tests",
+    "columnProbability": "Probability"
+  },
+  "history": {
+    "title": "Prediction history",
+    "loading": "Loading…",
+    "empty": "No predictions yet.",
+    "firstPrediction": "Make your first prediction",
+    "columnSmiles": "SMILES",
+    "columnDate": "Date",
+    "viewButton": "View"
+  },
+  "about": {
+    "title": "About this project",
+    "whatThisIsTitle": "What this is",
+    "whatThisIsText": "A SMILES string is parsed with RDKit into molecular descriptors and fingerprints, then scored by calibrated machine-learning models across 16 ADMET tasks — solubility, blood-brain barrier penetration, a 12-assay Tox21 toxicity panel, clinical trial toxicity, and FDA approval likelihood — each with an accompanying confidence estimate.",
+    "datasetsTitle": "Datasets",
+    "columnTask": "Task",
+    "columnDataset": "Source dataset",
+    "taskNames": {
+      "solubility": "Solubility",
+      "bbb": "BBB Penetration",
+      "tox21": "Toxicity (12 assays)",
+      "clintox": "Clinical Trial Toxicity + FDA Approval"
+    },
+    "datasets": {
+      "solubility": "ESOL / AqSolDB (MoleculeNet)",
+      "bbb": "BBBP (MoleculeNet)",
+      "tox21": "Tox21 (MoleculeNet)",
+      "clintox": "ClinTox (MoleculeNet)"
+    },
+    "datasetsSourceNote": "All four datasets are aggregated via MoleculeNet. See data/README.md in the project repository for exact sizes and licensing.",
+    "confidenceTitle": "How confidence works",
+    "confidenceText": "Confidence is not the model's overall accuracy — it is an estimate of how reliable this particular prediction is, derived from probability calibration (Platt/isotonic scaling). A confidence of 70% means the calibrated probability for this molecule should be trusted about as much as similar 70%-confidence predictions have historically been correct — it is not a guarantee about this individual molecule.",
+    "applicabilityDomainText": "The applicability-domain flag is a heuristic distance check against the training data's descriptor space, not a guarantee: an \"in-domain\" molecule can still be mispredicted, and an \"out-of-domain\" one is simply a stronger signal to treat the result with caution.",
+    "limitationsTitle": "Known limitations",
+    "limitations": {
+      "overfitting": "Documented train-vs-validation overfitting on 13 of the 16 tasks (all 12 Tox21 assays except NR-AhR, plus clinical trial toxicity) — train-set performance is dramatically better than validation, so the reported validation/test metrics (not the train metrics) are the honest estimate of real-world performance.",
+      "perTaskModels": "Per-task models, not a true multi-task architecture — each task's winning model is trained independently, so cross-task consistency is not guaranteed.",
+      "calibration": "Confidence is a proxy derived from the calibrated probability's distance from 0.5, not a separately validated uncertainty measure for every task.",
+      "datasetOverlap": "The four source datasets barely overlap by molecule — most training examples for any one task come from a single source dataset, so cross-task generalization should not be assumed.",
+      "tox21Coverage": "The Tox21 panel covers 12 specific assay mechanisms; it does not represent an exhaustive test of toxicity and should not be read as a complete safety profile.",
+      "applicabilityDomainHeuristic": "The applicability-domain flag is a descriptor-distance heuristic, not a formal guarantee of prediction reliability."
+    },
+    "disclaimerTitle": "Disclaimer",
+    "disclaimerText": "Research/educational use only. Not for clinical or regulatory decision-making. Predictions include explicit confidence and applicability-domain indicators and must never be treated as medical, regulatory, or safety guidance."
+  },
+  "errors": {
+    "retry": "Retry",
+    "unexpected": "Unexpected error",
+    "boundaryTitle": "Something went wrong",
+    "reloadButton": "Reload page"
+  }
+}
