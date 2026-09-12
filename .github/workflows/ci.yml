@@ -34,6 +34,12 @@ jobs:
       - name: Run per-task XGBoost experiments
         run: python ml/experiments_per_task_models.py
 
+      - name: Run feature engineering
+        run: python ml/feature_engineering.py
+
+      - name: Run calibration + applicability domain
+        run: python ml/calibration.py
+
       - name: Test (pytest)
         run: pytest ml/tests/ -v
 

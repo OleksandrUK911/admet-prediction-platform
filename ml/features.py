@@ -9,8 +9,15 @@ project #1's choice).
 
 import numpy as np
 import pandas as pd
-from rdkit import Chem
+from rdkit import Chem, RDLogger
 from rdkit.Chem import AllChem, Descriptors
+
+# Every script that imports this module computes descriptors/fingerprints
+# on molecules already canonicalized by ml/preprocess.py - RDKit's verbose
+# per-molecule warnings here (e.g. "not removing hydrogen atom without
+# neighbors") are harmless noise at this stage, not new information, and
+# were flooding CI/local logs across every downstream script.
+RDLogger.DisableLog("rdApp.*")
 
 DESCRIPTOR_FUNCS = {
     "MolWt": Descriptors.MolWt,

@@ -33,7 +33,7 @@
       "ood_mean_nn_distance": 1.5135391577514758,
       "in_domain_mean_nn_distance": 0.3099865724195741
     },
-    "trained_at": "2026-09-12T09:39:18.301431+00:00"
+    "trained_at": "2026-09-12T09:45:26.139984+00:00"
   },
   {
     "calibration": [
@@ -69,7 +69,7 @@
       "ood_mean_nn_distance": 1.3154627742270073,
       "in_domain_mean_nn_distance": 0.30809574273946844
     },
-    "trained_at": "2026-09-12T09:39:18.301431+00:00"
+    "trained_at": "2026-09-12T09:45:26.139984+00:00"
   },
   {
     "calibration": [
@@ -105,7 +105,7 @@
       "ood_mean_nn_distance": 1.5812073170200538,
       "in_domain_mean_nn_distance": 0.4023533098421022
     },
-    "trained_at": "2026-09-12T09:39:18.301431+00:00"
+    "trained_at": "2026-09-12T09:45:26.139984+00:00"
   },
   {
     "calibration": [
@@ -141,6 +141,6 @@
       "ood_mean_nn_distance": 1.5398330362613284,
       "in_domain_mean_nn_distance": 0.34723833428692263
     },
-    "trained_at": "2026-09-12T09:39:18.301431+00:00"
+    "trained_at": "2026-09-12T09:45:26.139984+00:00"
   }
 ]
