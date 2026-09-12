@@ -43,6 +43,9 @@ jobs:
       - name: Run model registry
         run: python ml/model_registry.py
 
+      - name: Run full evaluation
+        run: python ml/evaluate.py
+
       - name: Test (pytest)
         run: pytest ml/tests/ -v
 
