@@ -2,7 +2,7 @@
   "description": "Committed floor for CI regression gate (ml/check_regression_gate.py). per_task values are the val-split metrics of the CURRENTLY registered production winner (models/production/metadata.json) at the time this file was generated; calibration_ece values are the val-split platt_sigmoid ECE for the 4 representative tasks explored in ml/calibration.py. Regenerate by re-running the snippet in ml/check_regression_gate.py's module docstring after a deliberate, reviewed metric change - never to silence a real regression.",
   "generated_from_commit_context": "16-task per-task-model registry, ml/model_registry.py + ml/calibration.py, 2026-09-12",
   "tolerance": {
-    "classification_pr_auc": 0.02,
+    "classification_pr_auc": 0.035,
     "regression_rmse": 0.02,
     "calibration_ece": 0.05
   },

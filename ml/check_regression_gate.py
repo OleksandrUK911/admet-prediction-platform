@@ -7,7 +7,14 @@ Two checks, both against ml/results/metric_thresholds.json:
      models/production/metadata.json, compare its CURRENT val metric
      (PR-AUC for classification, RMSE for regression) against the
      committed floor value for that task, with a small tolerance
-     (default 0.02 absolute - see "tolerance" in the threshold file).
+     (0.035 absolute for classification PR-AUC, 0.02 for regression RMSE
+     - see "tolerance" in the threshold file). Classification tolerance
+     is wider than regression's because RandomForest/XGBoost training
+     (n_jobs=-1) is not perfectly bit-reproducible run-to-run even with
+     a fixed random_state - SR-MMP in particular has documented val-PR-AUC
+     jitter of ~0.02 between runs (see ml/TODO_evaluation_validation.md's
+     CV-vs-val-split finding), so 0.02 tolerance produced false-positive
+     CI failures on a genuinely non-regressed model.
      Classification fails if current PR-AUC < floor - tolerance.
      Regression fails if current RMSE > floor + tolerance.
 
