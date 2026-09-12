@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
-import torch
+import pytest
+
+torch = pytest.importorskip("torch")  # optional, heavy dep - see ml/requirements-multitask.txt
 
 from ml.experiments_multitask import (
     build_label_and_mask_matrices,

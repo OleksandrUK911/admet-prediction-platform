@@ -1,0 +1,5 @@
+# torch is a heavy, occasional-use dependency for ml/experiments_multitask.py
+# (the shared-backbone multi-task NN comparison) - kept out of the main
+# requirements.txt/CI path, same pattern as project #1's GNN experiment.
+# Install with: pip install -r ml/requirements-multitask.txt
+torch==2.14.0
