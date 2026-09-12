@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 
 from backend.app.inference import InvalidSmilesError, ModelService
@@ -60,3 +61,41 @@ def test_solubility_confidence_is_honestly_null(service):
     model - confidence must be null, not a fabricated number."""
     result = service.predict(ASPIRIN_SMILES)
     assert result["profile"]["solubility"]["confidence"] is None
+
+
+def test_applicability_domain_in_domain_for_real_molecule(service):
+    """A real, ordinary drug-like molecule (aspirin) should fall inside
+    the applicability domain - a sanity check for the "normal" case, to
+    contrast with the deliberately-out-of-domain case below."""
+    result = service.predict(ASPIRIN_SMILES)
+    ad = result["applicability_domain"]
+    assert ad["in_domain"] is True
+    assert ad["distance_score"] < service._ad_threshold
+
+
+def test_applicability_domain_flags_synthetic_far_outlier(service):
+    """Edge case: a descriptor vector far outside anything in the training
+    set must be flagged out-of-domain (in_domain=False) - tests the
+    flagging logic itself directly (ml/TODO_calibration_uncertainty.md's
+    "unit tests for boundary cases"), rather than relying on finding a
+    real-world molecule that happens to be an outlier.
+
+    Built by taking the scaler's fitted mean and adding 100 standard
+    deviations to every descriptor - guaranteed to be far past the
+    OOD_QUANTILE=0.90 threshold distance regardless of dataset specifics."""
+    assert service._ad_scaler is not None, "applicability-domain index not built - is data/processed/admet_processed.csv present?"
+
+    n_descriptors = len(service.descriptor_columns)
+    far_outlier = service._ad_scaler.mean_ + 100 * np.sqrt(service._ad_scaler.var_)
+    ad = service._applicability_domain(far_outlier.reshape(n_descriptors))
+
+    assert ad["in_domain"] is False
+    assert ad["distance_score"] > service._ad_threshold
+
+
+def test_applicability_domain_boundary_is_deterministic(service):
+    """Same input molecule -> same applicability-domain verdict every time
+    (no hidden randomness in the nearest-neighbor lookup)."""
+    first = service.predict(ASPIRIN_SMILES)["applicability_domain"]
+    second = service.predict(ASPIRIN_SMILES)["applicability_domain"]
+    assert first == second

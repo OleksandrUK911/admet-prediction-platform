@@ -3,151 +3,151 @@
     "task": "solubility",
     "fold": 0,
     "metric_name": "rmse",
-    "value": 0.6806098045674233
+    "value": 0.6691903204368163
   },
   {
     "task": "solubility",
     "fold": 0,
     "metric_name": "mae",
-    "value": 0.49345223075738676
+    "value": 0.48553930200981393
   },
   {
     "task": "solubility",
     "fold": 0,
     "metric_name": "r2",
-    "value": 0.8759590719419694
+    "value": 0.8800865479180308
   },
   {
     "task": "solubility",
     "fold": 1,
     "metric_name": "rmse",
-    "value": 0.7474379080704292
+    "value": 0.7228383732286893
   },
   {
     "task": "solubility",
     "fold": 1,
     "metric_name": "mae",
-    "value": 0.5631083053534869
+    "value": 0.5386844260441784
   },
   {
     "task": "solubility",
     "fold": 1,
     "metric_name": "r2",
-    "value": 0.8734641394467595
+    "value": 0.8816561259579632
   },
   {
     "task": "solubility",
     "fold": 2,
     "metric_name": "rmse",
-    "value": 0.6276872573737231
+    "value": 0.6198834561931162
   },
   {
     "task": "solubility",
     "fold": 2,
     "metric_name": "mae",
-    "value": 0.47774465163583213
+    "value": 0.47862719825205235
   },
   {
     "task": "solubility",
     "fold": 2,
     "metric_name": "r2",
-    "value": 0.8867770455477249
+    "value": 0.8895748620431788
   },
   {
     "task": "solubility",
     "fold": 3,
     "metric_name": "rmse",
-    "value": 0.7470932228109145
+    "value": 0.7575041014721976
   },
   {
     "task": "solubility",
     "fold": 3,
     "metric_name": "mae",
-    "value": 0.5611908324434616
+    "value": 0.5697536164720608
   },
   {
     "task": "solubility",
     "fold": 3,
     "metric_name": "r2",
-    "value": 0.8737379178578982
+    "value": 0.8701944293935562
   },
   {
     "task": "solubility",
     "fold": 4,
     "metric_name": "rmse",
-    "value": 0.6956059603184046
+    "value": 0.6891930982184384
   },
   {
     "task": "solubility",
     "fold": 4,
     "metric_name": "mae",
-    "value": 0.5463239292317614
+    "value": 0.5423230410438805
   },
   {
     "task": "solubility",
     "fold": 4,
     "metric_name": "r2",
-    "value": 0.8679685716128425
+    "value": 0.8703917723543675
   },
   {
     "task": "SR-MMP",
     "fold": 0,
     "metric_name": "roc_auc",
-    "value": 0.8722273327753993
+    "value": 0.8620185224891237
   },
   {
     "task": "SR-MMP",
     "fold": 0,
     "metric_name": "pr_auc",
-    "value": 0.6327253891008537
+    "value": 0.6260791484935556
   },
   {
     "task": "SR-MMP",
     "fold": 1,
     "metric_name": "roc_auc",
-    "value": 0.8789193690469636
+    "value": 0.8875908440235644
   },
   {
     "task": "SR-MMP",
     "fold": 1,
     "metric_name": "pr_auc",
-    "value": 0.6981983548754301
+    "value": 0.7096123370679883
   },
   {
     "task": "SR-MMP",
     "fold": 2,
     "metric_name": "roc_auc",
-    "value": 0.8808842151626933
+    "value": 0.8721989759400981
   },
   {
     "task": "SR-MMP",
     "fold": 2,
     "metric_name": "pr_auc",
-    "value": 0.588695308874438
+    "value": 0.613694843775948
   },
   {
     "task": "SR-MMP",
     "fold": 3,
     "metric_name": "roc_auc",
-    "value": 0.8951474150746022
+    "value": 0.8967647139789683
   },
   {
     "task": "SR-MMP",
     "fold": 3,
     "metric_name": "pr_auc",
-    "value": 0.6780456043656452
+    "value": 0.6975227744635778
   },
   {
     "task": "SR-MMP",
     "fold": 4,
     "metric_name": "roc_auc",
-    "value": 0.8820541760722348
+    "value": 0.879561412012353
   },
   {
     "task": "SR-MMP",
     "fold": 4,
     "metric_name": "pr_auc",
-    "value": 0.6442707456388946
+    "value": 0.6660002897973684
   },
   {
     "task": "bbbp_penetration",
