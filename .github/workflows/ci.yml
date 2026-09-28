@@ -101,7 +101,7 @@ jobs:
         run: ruff check backend/
 
       - name: Download production model artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: production-model
           path: .
@@ -158,7 +158,7 @@ jobs:
       # build artifacts, produced by the ml job and shared via this same
       # upload/download-artifact pair the backend job already uses above.
       - name: Download production model artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: production-model
           path: .
